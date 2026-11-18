@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://icemanai.it/sitemap.xml
