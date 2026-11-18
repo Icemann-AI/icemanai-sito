@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 48" width="192" height="48" role="img" aria-label="Iceman AI">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 216 48" width="216" height="48" role="img" aria-label="Iceman AI">
 <title>Iceman AI</title>
 <defs>
 <linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3de0ff"/><stop offset="1" stop-color="#2b7bff"/></linearGradient>
@@ -15,11 +15,12 @@
 <path d="M63 14V34"/>
 <path d="M84 17.5C82.5 15 80 14 77 14C72 14 70 18 70 24C70 30 72 34 77 34C80 34 82.5 33 84 30.5"/>
 <path d="M106 14H93V34H106M93 24H104"/>
-<path d="M115 34V14L121 26L127 14V34"/>
-<path d="M136 34V14L148 34V14"/>
+<path d="M115 34V14L122 26L129 14V34"/>
+<path d="M138 34L145 14L152 34M141 27.5H149"/>
+<path d="M161 34V14L173 34V14"/>
 </g>
 <g fill="none" stroke="#3de0ff" stroke-width="2.6" stroke-linejoin="miter" stroke-linecap="butt">
-<path d="M164 34L171 14L178 34M167 27.5H175"/>
-<path d="M184 14V34"/>
+<path d="M188 34L195 14L202 34M191 27.5H199"/>
+<path d="M208 14V34"/>
 </g>
 </svg>
