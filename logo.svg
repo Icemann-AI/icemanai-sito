@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 48" width="192" height="48" role="img" aria-label="Iceman AI">
+<title>Iceman AI</title>
+<defs>
+<linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3de0ff"/><stop offset="1" stop-color="#2b7bff"/></linearGradient>
+<radialGradient id="b"><stop offset="0" stop-color="#3de0ff" stop-opacity=".9"/><stop offset="1" stop-color="#3de0ff" stop-opacity="0"/></radialGradient>
+<style>.bg{animation:p 4s ease-in-out infinite}@keyframes p{50%{opacity:.35}}@media (prefers-reduced-motion:reduce){.bg{animation:none}}</style>
+</defs>
+<path d="M24 3L42 13.5V34.5L24 45L6 34.5V13.5Z" fill="#08142b" stroke="url(#g)" stroke-width="2.6" stroke-linejoin="round"/>
+<g stroke="url(#g)" stroke-width="1" opacity=".4" fill="none"><path d="M24 3V11M42 13.5L35 17.5M42 34.5L35 30.5M24 45V37M6 34.5L13 30.5M6 13.5L13 17.5"/></g>
+<circle class="bg" cx="24" cy="24" r="9" fill="url(#b)"/>
+<g stroke="#cfeeff" stroke-width="1.5" stroke-linecap="round" fill="none"><path d="M17 15H31M24 15V33M17 33H31"/></g>
+<g fill="#3de0ff"><circle cx="17" cy="15" r="1.9"/><circle cx="31" cy="15" r="1.9"/><circle cx="24" cy="15" r="1.9"/><circle cx="24" cy="33" r="1.9"/><circle cx="17" cy="33" r="1.9"/><circle cx="31" cy="33" r="1.9"/></g>
+<circle cx="24" cy="24" r="3" fill="#fff"/>
+<g fill="none" stroke="#e8f1ff" stroke-width="2.6" stroke-linejoin="miter" stroke-linecap="butt">
+<path d="M63 14V34"/>
+<path d="M84 17.5C82.5 15 80 14 77 14C72 14 70 18 70 24C70 30 72 34 77 34C80 34 82.5 33 84 30.5"/>
+<path d="M106 14H93V34H106M93 24H104"/>
+<path d="M115 34V14L121 26L127 14V34"/>
+<path d="M136 34V14L148 34V14"/>
+</g>
+<g fill="none" stroke="#3de0ff" stroke-width="2.6" stroke-linejoin="miter" stroke-linecap="butt">
+<path d="M164 34L171 14L178 34M167 27.5H175"/>
+<path d="M184 14V34"/>
+</g>
+</svg>

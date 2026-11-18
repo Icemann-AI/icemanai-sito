@@ -164,3 +164,11 @@ a.scheda:hover,a.scheda:focus-visible{transform:translateY(-4px);border-color:va
   body.chat-aperta{overflow:hidden}
   .chat-fab{right:14px;bottom:14px}
 }
+
+/* logo e FAQ */
+.logo img{display:block;height:38px;width:auto}
+.logo-piede{display:inline-block;margin-bottom:10px}
+.logo-piede img{display:block;height:32px;width:auto}
+.faq h3{margin:1.1em 0 .3em;color:#fff;font-size:1.1rem}
+.faq p{margin:0 0 .6em}
+@media(max-width:400px){.logo img{height:32px}}
