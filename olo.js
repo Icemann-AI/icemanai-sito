@@ -166,6 +166,12 @@ const CHAT_ENDPOINT = 'https://formsubmit.co/ajax/b8739721a69abb0da83a8dd78efe31
   function pronto() {
     rete();
     chat();
+    // Tendina Servizi: si chiude con Esc o clic fuori
+    var dd = d.querySelector('.dd');
+    if (dd) {
+      d.addEventListener('click', function (e) { if (dd.open && !dd.contains(e.target)) dd.open = false; });
+      d.addEventListener('keydown', function (e) { if (e.key === 'Escape' && dd.open) { dd.open = false; dd.querySelector('summary').focus(); } });
+    }
     // Menu telefono
     var b = d.querySelector('.burger'), n = d.getElementById('menu');
     if (b && n) {
