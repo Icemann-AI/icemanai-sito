@@ -1,5 +1,5 @@
 /* Iceman AI - script condiviso: menu, comparsa, rete di sfondo, chat, sfera olografica. Nessuna libreria. */
-const CHAT_ENDPOINT = 'https://formsubmit.co/ajax/info@icemanai.it';
+const CHAT_ENDPOINT = 'https://formsubmit.co/ajax/b8739721a69abb0da83a8dd78efe3172';
 (function () {
   'use strict';
   var d = document, root = d.documentElement;
@@ -27,7 +27,7 @@ const CHAT_ENDPOINT = 'https://formsubmit.co/ajax/info@icemanai.it';
       while (nodi.length < n) {
         var a = Math.random() * 6.283, v = 6 + Math.random() * 12;
         nodi.push({ x: Math.random() * w, y: Math.random() * h, vx: Math.cos(a) * v, vy: Math.sin(a) * v,
-          z: 0.2 + Math.random() * 0.8, o: 0.35 + Math.random() * 0.25 });
+          z: 0.2 + Math.random() * 0.8, o: 0.55 + Math.random() * 0.3 });
       }
     }
     function disegna(dt) {
@@ -51,7 +51,7 @@ const CHAT_ENDPOINT = 'https://formsubmit.co/ajax/info@icemanai.it';
           b = nodi[j];
           var dx = a.px - b.px, dy = a.py - b.py, q = dx * dx + dy * dy;
           if (q < D2) {
-            x.strokeStyle = 'rgba(127,216,255,' + ((1 - q / D2) * 0.16).toFixed(3) + ')';
+            x.strokeStyle = 'rgba(127,216,255,' + ((1 - q / D2) * 0.3).toFixed(3) + ')';
             x.beginPath(); x.moveTo(a.px, a.py); x.lineTo(b.px, b.py); x.stroke();
           }
         }
