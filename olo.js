@@ -1,5 +1,10 @@
-/* Iceman AI - script condiviso: menu, comparsa, rete di sfondo, chat, sfera olografica. Nessuna libreria. */
-const CHAT_ENDPOINT = 'https://formsubmit.co/ajax/b8739721a69abb0da83a8dd78efe3172';
+/* Iceman AI - script condiviso: menu, comparsa, rete di sfondo, live chat, sfera olografica. Nessuna libreria. */
+var ICEMAN_CHAT = {
+  iceman: '', /* es. https://TUO-TUNNEL.trycloudflare.com/api/sito-chat quando Iceman espone il tunnel */
+  pollinations: 'https://text.pollinations.ai/openai',
+  model: 'openai',
+  token: '' /* opzionale: stesso valore di ICEMAN_SITO_CHAT_TOKEN nel .env di Iceman */
+};
 (function () {
   'use strict';
   var d = document, root = d.documentElement;
@@ -85,38 +90,58 @@ const CHAT_ENDPOINT = 'https://formsubmit.co/ajax/b8739721a69abb0da83a8dd78efe31
     agg();
   }
 
-  /* ---------- Chat di contatto ---------- */
+  /* ---------- Live chat: risponde Iceman (automatico), non serve intervento manuale ---------- */
   function chat() {
+    var SYS = [
+      'Sei Iceman, assistente commerciale automatico di Iceman AI (icemanai.it).',
+      'Rispondi sempre in italiano, cordiale, massimo quattro frasi, senza markdown.',
+      'Sei un assistente automatico, non una persona. Proponi i servizi adatti (siti vetrina da 150 euro, social da 40 euro al mese, elenchi imprese da 29 euro, analisi sito gratuita, Dillo preventivi voce 15 euro al mese, traduzioni menu da 19 euro).',
+      'Se chiedono un preventivo preciso, invita a lasciare email o telefono oppure a scrivere a info@icemanai.it.',
+      'Non inventare prezzi diversi. Non promettere risultati su Google.',
+    ].join('\n');
+
     var fab = d.createElement('button');
-    fab.type = 'button'; fab.className = 'chat-fab'; fab.setAttribute('aria-label', 'Scrivici in chat');
+    fab.type = 'button'; fab.className = 'chat-fab'; fab.setAttribute('aria-label', 'Apri la chat live');
     fab.setAttribute('aria-expanded', 'false'); fab.setAttribute('aria-controls', 'chat-pan');
     fab.innerHTML = '<svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true"><path d="M5 6h22v16H14l-6 5v-5H5z" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/><circle cx="11" cy="14" r="1.6" fill="currentColor"/><circle cx="16" cy="14" r="1.6" fill="currentColor"/><circle cx="21" cy="14" r="1.6" fill="currentColor"/></svg>';
     var p = d.createElement('div');
-    p.id = 'chat-pan'; p.className = 'chat-pan'; p.setAttribute('role', 'dialog'); p.setAttribute('aria-label', 'Chat di contatto'); p.hidden = true;
+    p.id = 'chat-pan'; p.className = 'chat-pan'; p.setAttribute('role', 'dialog'); p.setAttribute('aria-label', 'Chat live con Iceman'); p.hidden = true;
     p.innerHTML =
-      '<div class="chat-top"><strong>Iceman &middot; assistente automatico</strong><button type="button" class="chat-x" aria-label="Chiudi la chat">&times;</button></div>' +
-      '<div class="chat-msgs" aria-live="polite"><p class="bolla">Ciao, sono Iceman, un assistente automatico. Lasciami il tuo contatto e di cosa hai bisogno: ti rispondo appena possibile, di solito entro poche ore lavorative.</p></div>' +
-      '<form class="chat-form" novalidate>' +
-      '<label for="ch-nome">Nome (facoltativo)</label><input id="ch-nome" name="name" type="text" autocomplete="name" maxlength="80">' +
-      '<label for="ch-cont">Contatto (email o telefono)</label><input id="ch-cont" name="contatto" type="text" autocomplete="email" maxlength="120" required>' +
-      '<label for="ch-msg">Messaggio</label><textarea id="ch-msg" name="message" rows="4" maxlength="2000" required></textarea>' +
-      '<div class="hp" aria-hidden="true"><label>Non compilare<input type="text" name="sito" tabindex="-1" autocomplete="off"></label></div>' +
-      '<label class="chat-ok"><input id="ch-ok" type="checkbox" name="consenso"> <span>Ho letto l’<a href="privacy.html">informativa privacy</a> e accetto che i dati inseriti vengano usati per rispondermi</span></label>' +
-      '<p class="chat-err" role="alert"></p>' +
-      '<button type="submit" class="btn pri chat-invia">Invia</button></form>';
+      '<div class="chat-top"><strong>Iceman &middot; live chat</strong><button type="button" class="chat-x" aria-label="Chiudi la chat">&times;</button></div>' +
+      '<div class="chat-msgs" aria-live="polite"><p class="bolla">Ciao, sono Iceman. Chiedimi cosa ti serve: sito web, social, elenchi clienti, analisi del tuo sito gratis, Dillo per preventivi a voce, o altro. Rispondo subito qui in chat.</p></div>' +
+      '<form class="chat-form chat-live" novalidate>' +
+      '<label class="chat-ok"><input id="ch-ok" type="checkbox" required> <span>Ho letto l’<a href="privacy.html">informativa privacy</a> e accetto l’uso della chat assistita da un sistema automatico</span></label>' +
+      '<div class="chat-row"><textarea id="ch-msg" rows="2" maxlength="1200" placeholder="Scrivi qui…" required></textarea><button type="submit" class="btn pri chat-invia">Invia</button></div>' +
+      '<p class="chat-err" role="alert"></p></form>';
     d.body.appendChild(fab); d.body.appendChild(p);
     var msgs = p.querySelector('.chat-msgs'), f = p.querySelector('form'), err = p.querySelector('.chat-err'),
-        inv = p.querySelector('.chat-invia'), chiudi = p.querySelector('.chat-x'), ultimo = fab;
+      inv = p.querySelector('.chat-invia'), chiudi = p.querySelector('.chat-x'), txt = p.querySelector('#ch-msg'), ok = p.querySelector('#ch-ok');
+    var storico = []; var nInvii = 0; var MAX = 40;
+
+    try {
+      var raw = sessionStorage.getItem('iceman-chat-storico');
+      if (raw) storico = JSON.parse(raw);
+      if (!Array.isArray(storico)) storico = [];
+    } catch (e) { storico = []; }
+    for (var si = 0; si < storico.length; si++) {
+      if (storico[si].role === 'user') bolla(storico[si].content, true);
+      else if (storico[si].role === 'assistant') bolla(storico[si].content, false);
+    }
+
+    function salva() {
+      try { sessionStorage.setItem('iceman-chat-storico', JSON.stringify(storico.slice(-24))); } catch (e) { /* ignora */ }
+    }
 
     function apri(da) {
       ultimo = da || fab; p.hidden = false; fab.setAttribute('aria-expanded', 'true');
       d.body.classList.add('chat-aperta');
-      setTimeout(function () { (f.hidden ? chiudi : f.elements.name).focus(); }, 30);
+      setTimeout(function () { txt.focus(); }, 30);
     }
     function chiudiPan() {
       p.hidden = true; fab.setAttribute('aria-expanded', 'false'); d.body.classList.remove('chat-aperta');
       try { ultimo.focus(); } catch (e) { fab.focus(); }
     }
+    var ultimo = fab;
     fab.addEventListener('click', function () { if (p.hidden) apri(fab); else chiudiPan(); });
     chiudi.addEventListener('click', chiudiPan);
     var bt = d.querySelectorAll('[data-chat]');
@@ -124,43 +149,94 @@ const CHAT_ENDPOINT = 'https://formsubmit.co/ajax/b8739721a69abb0da83a8dd78efe31
     d.addEventListener('keydown', function (e) {
       if (p.hidden) return;
       if (e.key === 'Escape') { e.stopPropagation(); chiudiPan(); return; }
-      if (e.key === 'Tab') {
-        var el = p.querySelectorAll('button:not([disabled]),input:not([tabindex="-1"]),textarea,a[href]');
-        var pr = el[0], ul = el[el.length - 1];
-        if (e.shiftKey && d.activeElement === pr) { e.preventDefault(); ul.focus(); }
-        else if (!e.shiftKey && d.activeElement === ul) { e.preventDefault(); pr.focus(); }
-      }
     }, true);
 
-    function bolla(t, mia) { var b = d.createElement('p'); b.className = 'bolla' + (mia ? ' mia' : ''); b.textContent = t; msgs.appendChild(b); msgs.scrollTop = msgs.scrollHeight; return b; }
-    function validoContatto(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v) || /^\+?[0-9][0-9 .\/-]{5,}$/.test(v); }
+    function bolla(t, mia) {
+      var b = d.createElement('p'); b.className = 'bolla' + (mia ? ' mia' : ''); b.textContent = t;
+      msgs.appendChild(b); msgs.scrollTop = msgs.scrollHeight; return b;
+    }
+    function bollaAttesa() {
+      var b = d.createElement('p'); b.className = 'bolla chat-pensa'; b.textContent = 'Sto pensando…';
+      msgs.appendChild(b); msgs.scrollTop = msgs.scrollHeight; return b;
+    }
+
+    function chiediIceman(messages) {
+      return urlChat().then(function (url) {
+      if (!url) throw new Error('no-ice');
+      var hdr = { 'Content-Type': 'application/json', Accept: 'application/json' };
+      if (ICEMAN_CHAT.token) hdr['X-Iceman-Sito'] = ICEMAN_CHAT.token;
+      return fetch(url, { method: 'POST', headers: hdr, body: JSON.stringify({ messages: messages }) })
+        .then(function (r) {
+          return r.json().then(function (j) {
+            if (!r.ok || !j.reply) throw new Error(j.error || 'ice');
+            return j.reply;
+          });
+        });
+      });
+    }
+
+    function urlChat() {
+      var fisso = (ICEMAN_CHAT.iceman || '').trim();
+      if (fisso) return Promise.resolve(fisso);
+      return fetch('chat-endpoint.json?t=' + Date.now(), { cache: 'no-store' })
+        .then(function (r) { return r.json(); })
+        .then(function (j) { return (j && j.url ? String(j.url) : '').trim(); })
+        .catch(function () { return ''; });
+    }
+
+    function chiediPollinations(messages) {
+      return fetch(ICEMAN_CHAT.pollinations, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({ model: ICEMAN_CHAT.model, messages: [{ role: 'system', content: SYS }].concat(messages) }),
+      }).then(function (r) {
+        return r.json().then(function (j) {
+          var c = j && j.choices && j.choices[0] && j.choices[0].message && j.choices[0].message.content;
+          if (!r.ok || !c) throw new Error('poll');
+          return String(c).trim();
+        });
+      });
+    }
+
+    function rispondi(messages) {
+      return chiediIceman(messages).catch(function () { return chiediPollinations(messages); });
+    }
+
     f.addEventListener('submit', function (e) {
       e.preventDefault(); err.textContent = '';
-      var nome = f.elements.name.value.trim(), cont = f.elements.contatto.value.trim(), m = f.elements.message.value.trim();
-      if (!cont || !validoContatto(cont)) { err.textContent = 'Inserisci un’email o un numero di telefono valido.'; f.elements.contatto.focus(); return; }
-      if (m.length < 3) { err.textContent = 'Scrivi un breve messaggio.'; f.elements.message.focus(); return; }
-      if (!f.elements.consenso.checked) { err.textContent = 'Per inviare serve accettare l’informativa privacy.'; f.elements.consenso.focus(); return; }
-      if (f.elements.sito.value) { fine(); return; } // trappola anti-bot: finto successo
-      inv.disabled = true; inv.textContent = 'Invio in corso…';
-      var ctl = window.AbortController ? new AbortController() : null, to = setTimeout(function () { if (ctl) ctl.abort(); }, 15000);
-      fetch(CHAT_ENDPOINT, {
-        method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({ name: nome, contatto: cont, message: m, _subject: 'Nuovo messaggio dal sito icemanai.it', _template: 'table', _captcha: 'false' }),
-        signal: ctl ? ctl.signal : undefined
-      }).then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) {
-        if (!r.ok || j.success === 'false' || j.success === false) throw new Error('x');
-        bolla(m, true); fine();
-      }); }).catch(function () {
-        var b = bolla('Non sono riuscito a inviare: scrivici a ');
-        var a = d.createElement('a'); a.href = 'mailto:info@icemanai.it?subject=Messaggio%20dal%20sito'; a.textContent = 'info@icemanai.it'; b.appendChild(a);
-        inv.disabled = false; inv.textContent = 'Invia';
-      }).then(function () { clearTimeout(to); });
+      if (nInvii >= MAX) { err.textContent = 'Hai raggiunto il limite di messaggi per questa sessione. Scrivi a info@icemanai.it.'; return; }
+      if (!ok.checked) { err.textContent = 'Accetta l’informativa privacy per usare la chat.'; ok.focus(); return; }
+      var m = txt.value.trim();
+      if (m.length < 1) return;
+      txt.value = '';
+      bolla(m, true);
+      storico.push({ role: 'user', content: m });
+      salva();
+      nInvii += 1;
+      inv.disabled = true;
+      var att = bollaAttesa();
+      var ctl = window.AbortController ? new AbortController() : null;
+      var to = setTimeout(function () { if (ctl) ctl.abort(); }, 55000);
+      rispondi(storico)
+        .then(function (risp) {
+          att.remove();
+          bolla(risp, false);
+          storico.push({ role: 'assistant', content: risp });
+          salva();
+        })
+        .catch(function () {
+          att.remove();
+          bolla('Scusa, non riesco a rispondere adesso. Scrivi a info@icemanai.it e ti rispondiamo al più presto.', false);
+        })
+        .then(function () {
+          clearTimeout(to);
+          inv.disabled = false;
+          txt.focus();
+        });
     });
-    function fine() {
-      bolla('Ricevuto, ti rispondo presto.');
-      f.reset(); f.hidden = true; inv.disabled = false; inv.textContent = 'Invia';
-      chiudi.focus();
-    }
+    txt.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); f.requestSubmit ? f.requestSubmit() : f.dispatchEvent(new Event('submit', { cancelable: true })); }
+    });
   }
 
   function pronto() {
