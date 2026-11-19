@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Casa del Lago (demo, struttura inventata) | Iceman AI</title>
+<meta name="description" content="Pagina dimostrativa di un B&B inventato, Casa del Lago, per provare l'assistente automatico di Iceman AI. Nessuna prenotazione reale.">
+<meta name="robots" content="noindex, follow">
+<meta name="theme-color" content="#2f5d62">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://icemanai.it/demo-bb.html">
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font:17px/1.65 Georgia,"Times New Roman",serif;color:#26323a;background:#f7f3ec}
+a{color:#1f5f66}
+a:hover{color:#0e3a40}
+:focus-visible{outline:3px solid #0e3a40;outline-offset:3px;border-radius:4px}
+.demo{position:sticky;top:0;z-index:20;background:#ffc857;color:#1b1300;font:600 15px/1.4 system-ui,-apple-system,"Segoe UI",Arial,sans-serif;padding:10px 16px;text-align:center}
+.demo a{color:#1b1300}
+.wrap{width:min(1000px,100% - 32px);margin:0 auto}
+header.s{background:#2f5d62;color:#fff;padding:14px 0}
+header.s .wrap{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+header.s strong{font-size:1.3rem;letter-spacing:.02em}
+header.s nav a{color:#fff;text-decoration:none;margin-left:16px;font:15px system-ui,Arial,sans-serif}
+header.s nav a:hover{text-decoration:underline}
+.hero{background:linear-gradient(160deg,#4c8a91,#2f5d62 55%,#1f3f44);color:#fff;padding:72px 0 80px}
+.hero h1{font-size:clamp(2rem,6vw,3.2rem);line-height:1.1;margin:0 0 .4em}
+.hero p{font-size:1.2rem;max-width:34em;margin:0 0 1.2em}
+.hero .tasto{display:inline-block;background:#f2c14e;color:#1f2a2e;text-decoration:none;font:700 16px system-ui,Arial,sans-serif;padding:14px 24px;border-radius:10px}
+section{padding:48px 0}
+h2{font-size:clamp(1.5rem,4vw,2rem);margin:0 0 .6em;color:#1f4a50}
+.griglia{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+.card{background:#fff;border:1px solid #e3dccd;border-radius:14px;padding:20px}
+.card h3{margin:0 0 .3em;font-size:1.15rem;color:#1f4a50}
+.card .pr{color:#7a5a12;font:600 15px system-ui,Arial,sans-serif}
+ul.l{padding-left:1.2em}
+.prova{background:#fff;border:2px dashed #2f5d62;border-radius:14px;padding:20px;margin-top:10px;font-family:system-ui,Arial,sans-serif;font-size:16px}
+.prova li{margin:.3em 0}
+footer{background:#1f3f44;color:#dfeceb;padding:30px 0;font:15px/1.6 system-ui,Arial,sans-serif}
+footer a{color:#ffe29a}
+</style>
+</head>
+<body>
+<div class="demo" role="note"><strong>Demo: struttura inventata.</strong> Casa del Lago non esiste e non si puo' prenotare. Serve a provare l'assistente automatico di <a href="assistente-aziende.html">Iceman AI</a>.</div>
+
+<header class="s"><div class="wrap"><strong>Casa del Lago</strong>
+<nav aria-label="Principale"><a href="#camere">Camere</a><a href="#servizi">Servizi</a><a href="#info">Info utili</a></nav></div></header>
+
+<main>
+<div class="hero"><div class="wrap">
+<h1>Un B&amp;B di cinque camere, a due passi dal lago</h1>
+<p>Colazione con prodotti locali, giardino sulla riva e un titolare che accoglie gli ospiti di persona. (Testo di fantasia per la demo.)</p>
+<a class="tasto" href="#prova">Prova l'assistente automatico</a>
+</div></div>
+
+<section id="camere"><div class="wrap">
+<h2>Le camere</h2>
+<div class="griglia">
+<div class="card"><h3>Camera Ninfea</h3><p>Matrimoniale con bagno privato e vista giardino.</p><span class="pr">da 85 euro a notte</span></div>
+<div class="card"><h3>Camera Giunco</h3><p>Due letti singoli, al piano terra senza gradini.</p><span class="pr">da 80 euro a notte</span></div>
+<div class="card"><h3>Camera Airone</h3><p>Matrimoniale con balcone vista lago.</p><span class="pr">da 105 euro a notte</span></div>
+<div class="card"><h3>Camera Salice</h3><p>Tripla: matrimoniale e un letto singolo.</p><span class="pr">da 120 euro a notte (3 persone)</span></div>
+<div class="card"><h3>Suite Tramonto</h3><p>Zona soggiorno, vasca e balcone sul lago, per 2-4 persone.</p><span class="pr">da 150 euro a notte</span></div>
+</div>
+<p><small>Prezzi indicativi per due persone, colazione inclusa. Da verificare con il titolare.</small></p>
+</div></section>
+
+<section id="servizi" style="background:#efe8da"><div class="wrap">
+<h2>Servizi</h2>
+<ul class="l"><li>Colazione dolce e salata inclusa</li><li>Wi-Fi gratuito</li><li>Parcheggio privato gratuito</li><li>Giardino con sdraio e riva privata</li><li>Noleggio biciclette</li><li>Aria condizionata in tutte le camere</li></ul>
+</div></section>
+
+<section id="info"><div class="wrap">
+<h2>Info utili</h2>
+<p>Check-in dalle 15:00 alle 20:00, check-out entro le 10:30. Piccoli cani ammessi su richiesta.</p>
+<p>Contatti di fantasia: info@casadellago.example.</p>
+<div class="prova" id="prova">
+<strong>Prova a chiedere all'assistente (bolla in basso a destra):</strong>
+<ul><li>Che camere avete e quanto costano?</li><li>C'e il parcheggio? Posso portare il cane?</li><li>A che ora e la colazione?</li><li>Vorrei prenotare dal 12 al 15 agosto: lascio la mia email e voi mi ricontattate.</li></ul>
+<p>Le risposte arrivano da un sistema automatico e usano solo la scheda inventata di Casa del Lago. Se fai una richiesta di contatto, nella demo non arriva a nessuno: finisce solo in un registro di prova.</p>
+</div>
+</div></section>
+</main>
+
+<footer><div class="wrap">
+<p>Pagina dimostrativa creata da <a href="index.html">Iceman AI</a>. Struttura, nome, indirizzo e contatti sono inventati. <a href="assistente-aziende.html">Scopri l'assistente per la tua attivita'</a> &middot; <a href="privacy.html">Privacy</a></p>
+</div></footer>
+<script src="assistente.js" data-cliente="demo-bb" data-privacy="privacy.html" defer></script>
+</body>
+</html>
