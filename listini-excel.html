@@ -44,7 +44,7 @@
 <main class="wrap">
 
 <h2>Prima e dopo</h2>
-<p class="small">Esempio anonimizzato su dati inventati (listino tipo ferramenta B2B), non un file di un cliente reale. Sono mostrate le stesse righe prima e dopo la pulizia.</p>
+<p class="small">Esempio anonimizzato su dati inventati (listino tipo ferramenta B2B), non un file di un cliente reale. A sinistra un estratto di 8 righe come arrivano; a destra le 13 righe del file di esempio, con valori e ordine identici al CSV.</p>
 <div class="prima-dopo">
   <div class="box prima">
     <h3>Prima</h3>
@@ -58,15 +58,21 @@
 09999;Gancio a S acciaio;1.234.50</code>
   </div>
   <div class="box dopo">
-    <h3>Dopo</h3>
-    <code>00814;Vite autofilettante M6;12.50
-(riga duplicata tolta)
-04567;Rondella grower;3.45
-10200;Bullone esagonale M8x40;1234.50
-10201;Tassello nylon 8mm;15.90
-01590;Staffa mensola zincata;29.00
-07771;Fascetta plastica 200mm;[da verificare: n.d.]
-09999;Gancio a S acciaio;[da verificare: formato prezzo ambiguo]</code>
+    <h3>Le 13 righe del file di esempio (CSV)</h3>
+    <code>codice_articolo;descrizione;prezzo
+00814;Vite autofilettante M6;EUR 12,50
+00814;Vite autofilettante M6;EUR 12,50
+00123;Dado esagonale zincato;8,75
+04567;Rondella grower;€ 3,45
+10200;Bullone esagonale M8x40;1.234,50
+10201;Tassello nylon 8mm;15,9 EUR
+08888;Collare stringi tubo;22,00
+08888;Collare stringi tubo;22,00
+00042;Guarnizione O-ring;4,20
+01590;  Staffa mensola zincata  ;  29,00  
+02001;Connettore rapido acqua;12.50
+07771;Fascetta plastica 200mm;n.d.
+09999;Gancio a S acciaio;1.234.50</code>
   </div>
 </div>
 <p class="small" style="margin-top:12px">Il formato dei prezzi (punto o virgola) si concorda con te. I valori dubbi non vengono indovinati: restano segnalati nella nota di consegna.</p>
