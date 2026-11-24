@@ -44,21 +44,10 @@
 <main class="wrap">
 
 <h2>Prima e dopo</h2>
-<p class="small">Esempio anonimizzato su dati inventati (listino tipo ferramenta B2B), non un file di un cliente reale. A sinistra un estratto di 8 righe come arrivano; a destra le 13 righe del file di esempio, con valori e ordine identici al CSV.</p>
+<p class="small">Esempio anonimizzato su dati inventati (listino tipo ferramenta B2B), non un file di un cliente reale. A sinistra il file originale (13 righe), a destra lo stesso file dopo la pulizia (11 righe).</p>
 <div class="prima-dopo">
   <div class="box prima">
-    <h3>Prima</h3>
-    <code>00814;Vite autofilettante M6;EUR 12,50
-00814;Vite autofilettante M6;EUR 12,50
-04567;Rondella grower;&euro; 3,45
-10200;Bullone esagonale M8x40;1.234,50
-10201;Tassello nylon 8mm;15,9 EUR
-01590;  Staffa mensola zincata  ;  29,00  
-07771;Fascetta plastica 200mm;n.d.
-09999;Gancio a S acciaio;1.234.50</code>
-  </div>
-  <div class="box dopo">
-    <h3>Le 13 righe del file di esempio (CSV)</h3>
+    <h3>Prima: file originale (13 righe)</h3>
     <code>codice_articolo;descrizione;prezzo
 00814;Vite autofilettante M6;EUR 12,50
 00814;Vite autofilettante M6;EUR 12,50
@@ -74,7 +63,29 @@
 07771;Fascetta plastica 200mm;n.d.
 09999;Gancio a S acciaio;1.234.50</code>
   </div>
+  <div class="box dopo">
+    <h3>Dopo: file pulito (11 righe)</h3>
+    <code>codice_articolo;descrizione;prezzo
+00814;Vite autofilettante M6;12,50
+00123;Dado esagonale zincato;8,75
+04567;Rondella grower;3,45
+10200;Bullone esagonale M8x40;1234,50
+10201;Tassello nylon 8 mm;15,90
+08888;Collare stringi tubo;22,00
+00042;Guarnizione O-ring;4,20
+01590;Staffa mensola zincata;29,00
+02001;Connettore rapido acqua;12,50
+07771;Fascetta plastica 200 mm;n.d.
+09999;Gancio a S acciaio;1234,50</code>
+  </div>
 </div>
+<ul>
+  <li>Duplicati tolti: i codici 00814 e 08888 comparivano due volte, ora una sola riga ciascuno (da 13 a 11 righe).</li>
+  <li>Prezzi in un unico formato: due decimali, virgola decimale, senza &quot;EUR&quot; o &euro; e senza punto delle migliaia (1.234,50 diventa 1234,50).</li>
+  <li>Spazi iniziali e finali eliminati (per esempio nella riga 01590) e unit&agrave; di misura uniformi (8 mm, 200 mm).</li>
+  <li>Codici con gli zeri iniziali conservati (00814, 00042, 08888...).</li>
+  <li>Valori dubbi non inventati: &quot;n.d.&quot; resta &quot;n.d.&quot;; il prezzo 1.234.50 &egrave; stato letto come 1234,50 e andrebbe confermato con te.</li>
+</ul>
 <p class="small" style="margin-top:12px">Il formato dei prezzi (punto o virgola) si concorda con te. I valori dubbi non vengono indovinati: restano segnalati nella nota di consegna.</p>
 
 
