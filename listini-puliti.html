@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Listini puliti: il tuo file Excel/CSV sistemato in 24-48 ore</title>
+<link rel="canonical" href="https://icemanai.it/listini-puliti">
+<meta name="description" content="Listino Excel o CSV pulito: duplicati tolti, prezzi in un unico formato, righe dubbie segnalate. Primo file 29 euro per i primi 3 clienti, poi 39 euro.">
+<style>
+  :root{--blu:#1a5fb4;--testo:#1a1a1a;--grigio:#555;--sfondo:#f6f8fb}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:Arial,Helvetica,sans-serif;font-size:17px;line-height:1.55;color:var(--testo);background:#fff}
+  .wrap{max-width:980px;margin:0 auto;padding:0 20px}
+  header{background:var(--sfondo);padding:48px 0 36px;border-bottom:1px solid #dde4ef}
+  h1{font-size:2.1rem;line-height:1.25;margin:0 0 14px}
+  h2{font-size:1.5rem;margin:48px 0 14px;border-bottom:3px solid var(--blu);padding-bottom:6px}
+  h3{font-size:1.15rem;margin:0 0 8px}
+  p{margin:0 0 14px}
+  .lead{font-size:1.15rem;color:var(--grigio)}
+  .btn{display:inline-block;background:var(--blu);color:#fff;text-decoration:none;padding:12px 22px;border-radius:6px;font-weight:bold;margin-top:8px}
+  .small{font-size:.9rem;color:var(--grigio)}
+  .prima-dopo{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .box{border:1px solid #dde4ef;border-radius:8px;padding:18px;background:#fff}
+  .box.prima{background:#fdf3f2}
+  .box.dopo{background:#f1f9f3}
+  .box code{display:block;white-space:pre-wrap;word-break:break-word;font-size:.85rem;line-height:1.6;font-family:Consolas,monospace}
+  details{border:1px solid #dde4ef;border-radius:6px;padding:12px 16px;margin-bottom:10px}
+  summary{cursor:pointer;font-weight:bold}
+  details p{margin:10px 0 0}
+  table{border-collapse:collapse;width:100%}
+  td{border:1px solid #cfd7e3;padding:8px 10px;vertical-align:top}
+  footer{background:var(--sfondo);padding:28px 0;margin-top:56px;border-top:1px solid #dde4ef;font-size:.95rem}
+  @media (max-width:760px){.prima-dopo{grid-template-columns:1fr}h1{font-size:1.6rem}}
+</style>
+</head>
+<body>
+<header>
+<div class="wrap">
+  <h1>Listini puliti: il tuo file Excel/CSV sistemato in 24-48 ore</h1>
+  <p class="lead">Primo file <strong>29 &euro;</strong> (promo primi 3 clienti, poi 39 &euro;). Conferma scritta prima del pagamento. Consegna dopo il pagamento, in 24-48 ore.</p>
+  <a class="btn" href="mailto:info@icemanai.it?subject=listino">Scrivi a info@icemanai.it con &quot;listino&quot;</a>
+</div>
+</header>
+
+<main class="wrap">
+
+<h2>Prima e dopo</h2>
+<p class="small">Esempio dimostrativo con dati inventati (listino tipo ferramenta B2B), non un file di un cliente reale. Le righe &laquo;prima&raquo; sono ricostruite in modo plausibile a partire dagli stessi dati anonimizzati; le righe &laquo;dopo&raquo; sono quelle del file pulito.</p>
+<div class="prima-dopo">
+  <div class="box prima">
+    <h3>Prima (5 righe sporche)</h3>
+    <code>codice_articolo;descrizione;prezzo
+00814;VITE autofilettante m6 ;EUR 12,50
+00814;Vite autofilettante M6;EUR 12,50
+04567;rondella GROWER;&euro; 3,45
+10201;Tassello  nylon 8mm;15,9 EUR
+01590;  Staffa mensola zincata  ;  29,00  </code>
+  </div>
+  <div class="box dopo">
+    <h3>Dopo (4 righe: il duplicato 00814 &egrave; unito)</h3>
+    <code>codice_articolo;descrizione;prezzo
+00814;Vite autofilettante M6;12,50
+04567;Rondella grower;3,45
+10201;Tassello nylon 8 mm;15,90
+01590;Staffa mensola zincata;29,00</code>
+  </div>
+</div>
+<p><a class="btn" href="listini-puliti-esempio.csv" download>Scarica il CSV pulito completo (intestazione + 11 righe)</a></p>
+<p class="small">Il file completo parte da 13 righe dati; i codici 00814 e 08888 comparivano due volte, quindi dopo la pulizia le righe sono 11.</p>
+
+<h2>Cosa viene fatto</h2>
+<ul>
+  <li>Deduplica: una sola riga per codice.</li>
+  <li>Normalizzazione di codici e descrizioni (zeri iniziali conservati, spazi e maiuscole uniformati, unit&agrave; come 8 mm).</li>
+  <li>Prezzi in formato numerico: due decimali, senza &quot;EUR&quot; o &euro;, senza punto delle migliaia.</li>
+  <li>Colonne uniformi.</li>
+  <li>Controllo errori: i valori dubbi non vengono indovinati ma segnalati nella nota di consegna (per esempio &quot;n.d.&quot; resta &quot;n.d.&quot;).</li>
+</ul>
+
+<h2>Come funziona</h2>
+<ol>
+  <li>Invii il file a <a href="mailto:info@icemanai.it?subject=listino">info@icemanai.it</a>.</li>
+  <li>Ricevi un&rsquo;anteprima gratuita su 20 righe.</li>
+  <li>Confermi per iscritto.</li>
+  <li>Ricevi il link di pagamento.</li>
+  <li>Il file pulito ti viene consegnato dopo il pagamento, in 24-48 ore.</li>
+</ol>
+<h2>Prezzi</h2>
+<p><strong>39 &euro; a file</strong> (29 &euro; per i primi 3 clienti). Canone &quot;Listini sempre puliti&quot;: <strong>99 &euro;/mese</strong>. Automazione su misura: da <strong>900 &euro;</strong> una tantum.</p>
+<p class="small">Prezzi finali. IVA non applicabile (regime forfettario, art. 1, commi 54-89, L. 190/2014). Sulle fatture oltre 77,47 &euro; si applica l'imposta di bollo.</p>
+
+<h2>Domande frequenti</h2>
+<details open>
+  <summary>Cosa invio?</summary>
+  <p>Un file Excel o CSV: listino fornitori, listino clienti GDO, ordini tipo.</p>
+</details>
+<details open>
+  <summary>Quanto costa?</summary>
+  <p>29 &euro; per i primi 3 clienti, poi 39 &euro; a file. Forfettario, IVA non applicabile.</p>
+</details>
+<details open>
+  <summary>Fate anche aggiornamenti mensili?</summary>
+  <p>Si', con il canone &quot;Listini sempre puliti&quot; a 99 &euro;/mese, solo se serve.</p>
+</details>
+
+<h2>Contatto</h2>
+<table>
+  <tr><td>Titolare</td><td>Incarnato Ciro</td></tr>
+  <tr><td>Partita IVA</td><td>IT02921060188</td></tr>
+  <tr><td>Email</td><td><a href="mailto:info@icemanai.it">info@icemanai.it</a></td></tr>
+  <tr><td>Telefono / WhatsApp</td><td><a href="tel:+393522106048">+39 352 210 6048</a></td></tr>
+</table>
+</main>
+
+<footer>
+<div class="wrap">
+  <p class="small"><a href="privacy-listini.html">Informativa privacy</a> &middot; <a href="condizioni-listini.html">Condizioni del servizio</a></p>
+</div>
+</footer>
+</body>
+</html>
