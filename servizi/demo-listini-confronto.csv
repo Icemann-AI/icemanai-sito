@@ -1,0 +1,9 @@
+codice;descrizione;prezzo_forn_A;prezzo_forn_B;delta_euro;delta_pct;nota
+A100;Vite TX 4x20;12,50;12,50;0,00;0,0;ok
+A101;Tassello 8mm;0,89;0,95;-0,06;-6,3;variazione
+B200;Staffa mensola;;18,90;18,90;0,00;0,0;solo forn_B
+B201;Dado M8;3,10;2,85;0,25;8,8;variazione
+C300;Guaina 16mm;4,40;4,40;0,00;0,0;ok
+C301;Connettore rapido;7,20;7,20;0,00;0,0;ok
+Z999;Articolo cessato;5,00;;5,00;;solo forn_A
+ZZ01;Nuovo listino;;6,50;-6,50;;solo forn_B

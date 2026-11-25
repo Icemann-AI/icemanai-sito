@@ -1,0 +1,23 @@
+:root{--blu:#1a5fb4;--testo:#1a1a1a;--grigio:#555;--sfondo:#f6f8fb;--ok:#1a7f4e;--warn:#b45309}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;font-size:17px;line-height:1.55;color:var(--testo);background:#fff}
+.wrap{max-width:980px;margin:0 auto;padding:0 20px}
+header.hero{background:var(--sfondo);padding:40px 0 28px;border-bottom:1px solid #dde4ef}
+h1{font-size:2rem;line-height:1.25;margin:0 0 12px}h2{font-size:1.4rem;margin:36px 0 12px;border-bottom:3px solid var(--blu);padding-bottom:6px}h3{font-size:1.1rem;margin:0 0 8px}
+p{margin:0 0 12px}.lead{color:var(--grigio);font-size:1.05rem}
+.btn{display:inline-block;background:var(--blu);color:#fff;text-decoration:none;padding:11px 20px;border-radius:6px;font-weight:bold;border:0;cursor:pointer;font-size:1rem}
+.btn:hover{background:#144a8f}.btn.sec{background:#fff;color:var(--blu);border:2px solid var(--blu)}
+.small{font-size:.9rem;color:var(--grigio)}
+.demo{border:1px solid #dde4ef;border-radius:8px;padding:16px;background:#fff;margin:14px 0}
+.demo code{display:block;white-space:pre-wrap;font-family:Consolas,monospace;font-size:.85rem;line-height:1.5}
+table.tbl{border-collapse:collapse;width:100%;font-size:.92rem}table.tbl td,table.tbl th{border:1px solid #cfd7e3;padding:8px;vertical-align:top}
+tr.evidence{background:#fff8e6}tr.okrow{background:#eef9f2}
+.form-servizi-pmi{border:2px solid var(--blu);border-radius:8px;padding:18px;background:var(--sfondo);margin:24px 0}
+.form-servizi-pmi label{display:block;font-weight:bold;margin:12px 0 4px}
+.form-servizi-pmi input,.form-servizi-pmi textarea,.form-servizi-pmi select{width:100%;max-width:520px;padding:10px;font:inherit;border:1px solid #aab;border-radius:6px}
+.form-servizi-pmi textarea{min-height:100px}
+.esito{margin-top:10px;font-weight:bold}.esito.ok{color:var(--ok)}.esito.err{color:#b91c1c}
+.grid-servizi{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:24px 0}
+.card-s{border:1px solid #dde4ef;border-radius:10px;padding:18px;background:#fff}
+.card-s h3{margin-top:0;color:var(--blu)}
+.foot{background:var(--sfondo);padding:28px 0;margin-top:48px;border-top:1px solid #dde4ef}
+@media(max-width:760px){.grid-servizi{grid-template-columns:1fr}h1{font-size:1.55rem}}

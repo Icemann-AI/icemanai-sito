@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="it"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Riconciliazione bonifici e fatture | Iceman AI</title>
+<meta name="description" content="Abbinamento bonifici CSV + fatture Excel. Pilota 99 euro.">
+<link rel="stylesheet" href="/servizi-pmi.css">
+</head><body>
+<header class="hero"><div class="wrap"><p class="small"><a href="/servizi-pmi.html">&larr; Servizi PMI</a></p>
+<h1>Riconciliazione bonifici e fatture</h1><p class="lead">Abbinamento bonifici CSV + fatture Excel. Pilota 99 euro.</p></div></header>
+<main class="wrap"><h2>Sintomo</h2><p>Bonifici in entrata non abbinati alle fatture emesse; partite aperte a fine mese.</p>
+<h2>Intervento</h2><p>Match su importo, data, CRO/descrizione tra CSV banca e registro fatture. Pilota 99 euro (confermato).</p>
+<h2>Prova di riuscita</h2><p>File matched/unmatched + totale differenze esplicite.</p>
+<h2>Dimostrazione (fittizia)</h2>
+<table class="tbl"><tr><th>Movimento</th><th>Importo</th><th>Fatture</th><th>Esito</th></tr>
+<tr class="evidence"><td>Bonifico 15/11 CRO ***4821</td><td>1.250,00</td><td>FT-101 (680) + FT-102 (569,50)</td><td>Diff 0,50 euro da confermare</td></tr>
+<tr class="okrow"><td>Bonifico 10/11</td><td>420,00</td><td>FT-099</td><td>Abbinato</td></tr></table>
+<p class="small">Righe ambigue non forzate: la differenza 0,50 euro resta in sospeso finche il cliente conferma arrotondamento o nota di credito.</p><form class="form-servizi-pmi" data-servizio="S5">
+<p class="small">Descrivi il problema. Non inviare credenziali, estratti conto o documenti sensibili.</p>
+<label>Email</label><input name="email" type="email" required>
+<label>Azienda (facoltativo)</label><input name="azienda">
+<label>Descrizione</label><textarea name="messaggio" required maxlength="3500"></textarea>
+<button class="btn" type="submit">Richiedi preventivo</button><p class="esito"></p></form>
+</main>
+<footer class="foot"><div class="wrap"><p class="small">Incarnato Ciro &middot; P.IVA IT02921060188 &middot; IVA non applicabile (forfettario)</p></div></footer>
+<script src="/servizi-pmi-intake.js" defer></script></body></html>
