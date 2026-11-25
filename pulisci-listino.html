@@ -41,14 +41,14 @@ footer{background:var(--sfondo);padding:24px 0;margin-top:48px;border-top:1px so
 <div class="wrap">
   <span class="badge">Prototipo micro-SaaS &middot; compito #178</span>
   <h1>Pulisci listino CSV (anteprima nel browser)</h1>
-  <p class="lead">Carica un file <strong>CSV</strong> o <strong>TSV</strong> con codice, descrizione e prezzo. La pulizia avviene <strong>solo sul tuo dispositivo</strong>: nessun upload su server Iceman.</p>
+  <p class="lead">Carica un file <strong>CSV</strong> (punto e virgola o virgola) o <strong>TSV</strong> (tab) con codice, descrizione e prezzo. La pulizia avviene <strong>solo sul tuo dispositivo</strong>: nessun upload su server Iceman.</p>
 </div>
 </header>
 <main class="wrap">
   <div class="panel">
     <label for="file">File listino (.csv, .txt, .tsv)</label>
     <input type="file" id="file" accept=".csv,.txt,.tsv,text/csv,text/plain">
-    <p class="small">Suggerimento: delimiter automatico (; o ,). Per Excel salva prima come CSV UTF-8.</p>
+    <p class="small">Separatore automatico (; , o tab TSV). Virgolette RFC 4180 supportate. Per Excel salva come <em>CSV UTF-8</em> (non .xlsx).</p>
     <label for="colCodice">Colonna codice (indice, da 0)</label>
     <select id="colCodice"><option value="0" selected>0 — prima colonna</option><option value="1">1</option><option value="2">2</option></select>
     <label for="colPrezzo">Colonna prezzo (indice)</label>
@@ -62,7 +62,7 @@ footer{background:var(--sfondo);padding:24px 0;margin-top:48px;border-top:1px so
   <div id="stats" class="stats" hidden></div>
   <div id="warn" class="warn-list" hidden></div>
   <h2>Anteprima (max 30 righe)</h2>
-  <p class="small">Anteprima limitata a 30 righe; il download include tutte le righe pulite.</p>
+  <p class="small">Anteprima limitata a 30 righe; il download include tutte le righe elaborate in locale.</p>
   <div class="panel" style="overflow:auto;max-height:420px">
     <table id="tbl"><thead></thead><tbody></tbody></table>
     <p id="vuoto" class="small">Nessun file caricato.</p>
@@ -75,6 +75,7 @@ footer{background:var(--sfondo);padding:24px 0;margin-top:48px;border-top:1px so
 <footer>
 <div class="wrap">
   <p>Prototipo Dedalo / Iceman &mdash; dati elaborati in locale. Prezzi IVA non applicabile (forfettario).</p>
+  <p class="small">Formati supportati: CSV con ; o , e TSV; campi tra virgolette e virgole interne. Non supportati: .xlsx, multiriga non quotata, encoding non UTF-8 senza conversione.</p>
 </div>
 </footer>
 <script>
@@ -83,30 +84,40 @@ footer{background:var(--sfondo);padding:24px 0;margin-top:48px;border-top:1px so
   let rawText = '';
   let cleanedRows = [];
   let header = [];
+  let lastDelim = ';';
   let warnings = [];
 
   function detectDelimiter(line){
     const semi = (line.match(/;/g)||[]).length;
     const comma = (line.match(/,/g)||[]).length;
+    const tab = (line.match(/\t/g)||[]).length;
+    if(tab > 0 && tab >= semi && tab >= comma) return '\t';
     return semi >= comma ? ';' : ',';
+  }
+  function splitLine(line, delim){
+    const out=[]; let cur=''; let inQuotes=false;
+    for(let i=0;i<line.length;i++){
+      const c=line[i];
+      if(inQuotes){
+        if(c==='"'){
+          if(line[i+1]==='"'){ cur+='"'; i++; }
+          else inQuotes=false;
+        } else cur+=c;
+      } else {
+        if(c==='"') inQuotes=true;
+        else if(c===delim){ out.push(cur); cur=''; }
+        else cur+=c;
+      }
+    }
+    out.push(cur);
+    return out.map(s=>s.trim());
   }
   function parseCsv(text){
     const lines = text.replace(/\r\n/g,'\n').replace(/\r/g,'\n').split('\n').filter(l=>l.trim()!=='');
-    if(!lines.length) return {header:[],rows:[]};
+    if(!lines.length) return {header:[],rows:[],delim:';'};
     const delim = detectDelimiter(lines[0]);
-    const split = (line)=>{
-      const out=[]; let cur=''; let q=false;
-      for(let i=0;i<line.length;i++){
-        const c=line[i];
-        if(c==='"'){ q=!q; continue; }
-        if(!q && c===delim){ out.push(cur); cur=''; continue; }
-        cur+=c;
-      }
-      out.push(cur);
-      return out.map(s=>s.trim());
-    };
-    const header = split(lines[0]);
-    const rows = lines.slice(1).map(split);
+    const header = splitLine(lines[0], delim);
+    const rows = lines.slice(1).map(l=>splitLine(l, delim));
     return {header, rows, delim};
   }
   function collapseSpaces(s){ return s.replace(/\s+/g,' ').trim(); }
@@ -160,7 +171,7 @@ footer{background:var(--sfondo);padding:24px 0;margin-top:48px;border-top:1px so
   function rowsToCsv(hdr, rows, delim){
     const esc = (v)=>{
       const s = String(v??'');
-      if(/["\n;]/.test(s)) return '"'+s.replace(/"/g,'""')+'"';
+      if(/["\n\r]/.test(s) || s.includes(delim)) return '"'+s.replace(/"/g,'""')+'"';
       return s;
     };
     const lines = [hdr.map(esc).join(delim)];
@@ -209,6 +220,7 @@ footer{background:var(--sfondo);padding:24px 0;margin-top:48px;border-top:1px so
     const colPrice = parseInt(document.getElementById('colPrezzo').value,10);
     const parsed = parseCsv(rawText);
     header = parsed.header;
+    lastDelim = parsed.delim;
     const before = parsed.rows.length;
     cleanedRows = cleanRows(parsed, colCode, colPrice);
     renderTable(header, cleanedRows);
@@ -218,8 +230,7 @@ footer{background:var(--sfondo);padding:24px 0;margin-top:48px;border-top:1px so
     document.getElementById('cta').hidden = before <= 50 && warnings.length <= 3;
   });
   document.getElementById('btnScarica').addEventListener('click', function(){
-    const parsed = parseCsv(rawText);
-    const csv = rowsToCsv(header, cleanedRows, parsed.delim || ';');
+    const csv = rowsToCsv(header, cleanedRows, lastDelim);
     const blob = new Blob([csv], {type:'text/csv;charset=utf-8'});
     const a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
