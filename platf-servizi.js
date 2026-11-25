@@ -1,10 +1,10 @@
 ﻿(function(){'use strict';
 var GUIDE=[
   {id:'S1',cat:'WooCommerce',sym:['fattura','woocommerce','pdf','sdi','ordine','completato','fatturazione'],title:'Fatture WooCommerce mancanti',blurb:'Ordine pagato senza PDF o invio SDI.',url:'/servizi/fatture-woocommerce.html',prezzo:'da 190 euro (proposta)'},
-  {id:'S2',cat:'WooCommerce',sym:['email','ordine','woocommerce','smtp','notifica','mail','spam','riceve','cliente'],title:'Email ordine WooCommerce',blurb:'Cliente o admin senza notifica, testi diversi.',url:'/servizi/email-ordine-woocommerce.html',prezzo:'da 240 euro (proposta)'},
+  {id:'S2',cat:'WooCommerce',pri:3,sym:['woocommerce non invia email nuovo ordine','email','ordine','woocommerce','smtp','notifica','mail','spam','riceve','cliente'],title:'Email ordine WooCommerce',blurb:'Cliente o admin senza notifica, testi diversi.',url:'/servizi/email-ordine-woocommerce.html',prezzo:'da 240 euro (proposta)'},
   {id:'S3',cat:'Shopify',sym:['shopify','scorte','stock','pos','inventario','sku','overselling'],title:'Scorte Shopify e POS',blurb:'Quantita diverse tra negozio e online.',url:'/servizi/shopify-scorte-pos.html',prezzo:'audit 150 euro (proposta)'},
-  {id:'S4',cat:'Excel e CSV',sym:['listino','excel','csv','fornitore','confronto','prezzi','duplicati','import'],title:'Listini e confronto fornitori',blurb:'Due file, prezzi discordi o file sporco.',url:'/listini-puliti',prezzo:'29 euro primi 3 clienti, poi 39 euro/file'},
-  {id:'S4b',cat:'Excel e CSV',sym:['differenze','delta','confrontare','due file'],title:'Confronto due listini',blurb:'Report delta codici e prezzi.',url:'/servizi/confronto-due-listini-fornitore.html',prezzo:'29 euro primi 3 clienti, poi 39 euro/file'},
+  {id:'S4',cat:'Excel e CSV',pri:1,sym:['import listino fornitore csv','listino','excel','csv','fornitore','confronto','prezzi','duplicati','import'],title:'Listini e confronto fornitori',blurb:'Due file, prezzi discordi o file sporco.',url:'/listini-puliti',prezzo:'29 euro primi 3 clienti, poi 39 euro/file'},
+  {id:'S4b',cat:'Excel e CSV',pri:2,sym:['confrontare due file excel','differenze','delta','confrontare','due file'],title:'Confronto due listini',blurb:'Report delta codici e prezzi.',url:'/servizi/confronto-due-listini-fornitore.html',prezzo:'29 euro primi 3 clienti, poi 39 euro/file'},
   {id:'S5',cat:'Pagamenti',sym:['bonifico','riconciliazione','banca','fatture','partite','estratto'],title:'Riconciliazione bonifici e fatture',blurb:'Movimenti non abbinati al registro.',url:'/servizi/riconciliazione-bonifici-fatture.html',prezzo:'99 euro (proposta #235)'}
 ];
 var CATS=['Tutte','WooCommerce','Shopify','Excel e CSV','Pagamenti'];
@@ -20,7 +20,9 @@ function keywords(t){
 function render(){
   if(!box)return;
   var t=q?q.value.trim():'';
-  var out=GUIDE.filter(function(g){
+  var sorted=GUIDE.slice().sort(function(a,b){return (a.pri||99)-(b.pri||99);});
+  var src=sorted;
+  var out=src.filter(function(g){
     if(catAttiva!=='Tutte'&&g.cat!==catAttiva)return false;
     if(!t)return true;
     var hay=norm(g.title+' '+g.blurb+' '+g.sym.join(' '));
@@ -57,3 +59,5 @@ function init(){
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();
 
+
+/* compito245 */
