@@ -172,3 +172,6 @@ a.scheda:hover,a.scheda:focus-visible{transform:translateY(-4px);border-color:va
 .faq h3{margin:1.1em 0 .3em;color:#fff;font-size:1.1rem}
 .faq p{margin:0 0 .6em}
 @media(max-width:400px){.logo img{height:32px}}
+
+#filtri-cat .btn.sec.pri{background:linear-gradient(135deg,var(--bl),#1aa9e8);color:#fff}
+#filtri-cat .btn{font-size:.9rem;padding:10px 16px}
