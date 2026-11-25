@@ -1,4 +1,4 @@
-(function(){'use strict';
+﻿(function(){'use strict';
 var MAP={S1:{oggetto:'Richiesta — fatture WooCommerce',utm:'woocommerce-fatture'},S2:{oggetto:'Richiesta — email ordine WooCommerce',utm:'woocommerce-email'},S3:{oggetto:'Richiesta — scorte Shopify POS',utm:'shopify-pos'},S4:{oggetto:'Richiesta — confronto listini',utm:'confronto-listini'},S5:{oggetto:'Richiesta — riconciliazione bonifici',utm:'riconciliazione-bonifici'}};
 var baseUrl='';
 function ep(){if(baseUrl)return Promise.resolve(baseUrl);
@@ -18,7 +18,7 @@ function bindForm(f){
     var az=(f.querySelector('[name=azienda]')||{}).value||'';
     if(!email||!msg){if(es){es.className='esito err';es.textContent='Inserisci email e descrizione del problema.';}return;}
     var utm=(MAP[sid]||{}).utm||'';
-    if(es){es.className='esito';es.textContent='Invio In corso…';}
+    if(es){es.className='esito';es.textContent='Invio in corso…';}
     ep().then(function(url){
       if(!url){mailFallback(sid,email,msg,az);if(es)es.textContent='Apertura mail (invio automatico non disponibile).';return;}
       return fetch(url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:email,servizio:sid,messaggio:msg,azienda:az,utm_campaign:'compito245',utm_content:utm})})
