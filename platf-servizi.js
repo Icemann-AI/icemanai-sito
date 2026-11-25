@@ -31,7 +31,7 @@ function render(){
     return ws.every(function(w){return hay.indexOf(w)>=0;});
   });
   box.innerHTML=out.length?out.map(function(g){
-    return '<a class="vetro scheda rev vis" href="'+g.url+'"><span class="eti">'+g.cat+' \u00b7 guida gratuita</span><h3>'+g.title+'</h3><p class="mu">'+g.blurb+'</p><span class="prezzo">'+g.prezzo+'</span></a>';
+    return '<a class="vetro scheda rev vis" href="'+g.url+'"><span class="eti">'+g.cat+' · guida gratuita</span><h3>'+g.title+'</h3><p class="mu">'+g.blurb+'</p><span class="prezzo">'+g.prezzo+'</span></a>';
   }).join(''):'<p class="mu vetro rev vis">Nessuna guida per questo testo. Prova fattura, email, shopify, listino o bonifico, oppure <a href="servizi-pmi.html">apri hub servizi</a>.</p>';
 }
 function setCat(c){
