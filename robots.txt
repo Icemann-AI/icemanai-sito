@@ -1,4 +1,10 @@
 User-agent: *
 Allow: /
 
+Disallow: /area-clienti.html
+Disallow: /pratica.html
+Disallow: /verifica-email.html
+Disallow: /recupero-password.html
+Disallow: /disiscrizione-marketing.html
+
 Sitemap: https://icemanai.it/sitemap.xml
