@@ -48,24 +48,30 @@
 <p class="small">Esempio dimostrativo con dati inventati (listino tipo ferramenta B2B), non un file di un cliente reale. Le righe &laquo;prima&raquo; sono ricostruite in modo plausibile a partire dagli stessi dati anonimizzati; le righe &laquo;dopo&raquo; sono quelle del file pulito.</p>
 <div class="prima-dopo">
   <div class="box prima">
-    <h3>Prima (5 righe sporche)</h3>
+    <h3>Prima (5 articoli, righe sporche)</h3>
     <code>codice_articolo;descrizione;prezzo
-00814;VITE autofilettante m6 ;EUR 12,50
-00814;Vite autofilettante M6;EUR 12,50
+00123;DADO esagonale  zincato ;8,75
 04567;rondella GROWER;&euro; 3,45
 10201;Tassello  nylon 8mm;15,9 EUR
-01590;  Staffa mensola zincata  ;  29,00  </code>
+01590;  Staffa mensola zincata  ;  29,00  
+02001;Connettore rapido acqua;12.50</code>
   </div>
   <div class="box dopo">
-    <h3>Dopo (4 righe: il duplicato 00814 &egrave; unito)</h3>
+    <h3>Dopo (gli stessi 5 articoli, puliti)</h3>
     <code>codice_articolo;descrizione;prezzo
-00814;Vite autofilettante M6;12,50
+00123;Dado esagonale zincato;8,75
 04567;Rondella grower;3,45
 10201;Tassello nylon 8 mm;15,90
-01590;Staffa mensola zincata;29,00</code>
+01590;Staffa mensola zincata;29,00
+02001;Connettore rapido acqua;12,50</code>
   </div>
 </div>
-<p><a class="btn" href="listini-puliti-esempio.csv" download>Scarica il CSV pulito completo (intestazione + 11 righe)</a></p>
+<h3 style="margin-top:22px">Deduplica (esempio a parte)</h3>
+<div class="prima-dopo">
+  <div class="box prima"><code>00814;Vite autofilettante M6;EUR 12,50
+00814;Vite autofilettante M6;EUR 12,50</code></div>
+  <div class="box dopo"><code>00814;Vite autofilettante M6;12,50</code></div>
+</div><p><a class="btn" href="listini-puliti-esempio.csv" download>Scarica il CSV pulito completo (intestazione + 11 righe)</a></p>
 <p class="small">Il file completo parte da 13 righe dati; i codici 00814 e 08888 comparivano due volte, quindi dopo la pulizia le righe sono 11.</p>
 
 <h2>Cosa viene fatto</h2>
