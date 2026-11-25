@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prototipo: pulisci listino CSV | Iceman</title>
+<meta name="description" content="Strumento dimostrativo: carica un CSV listino, vedi anteprima pulita nel browser. I dati restano sul tuo PC.">
+<style>
+:root{--blu:#1a5fb4;--testo:#1a1a1a;--grigio:#555;--sfondo:#f6f8fb;--ok:#1a7f37;--warn:#9a6700}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;font-size:17px;line-height:1.55;color:var(--testo);background:#fff}
+.wrap{max-width:980px;margin:0 auto;padding:0 20px}
+header{background:var(--sfondo);padding:40px 0 28px;border-bottom:1px solid #dde4ef}
+h1{font-size:1.9rem;line-height:1.25;margin:0 0 10px}
+h2{font-size:1.35rem;margin:36px 0 12px;border-bottom:3px solid var(--blu);padding-bottom:6px}
+.lead{color:var(--grigio);font-size:1.05rem}
+.badge{display:inline-block;background:#e8f0fb;color:var(--blu);font-size:.8rem;font-weight:bold;padding:4px 10px;border-radius:4px;margin-bottom:12px}
+.panel{border:1px solid #dde4ef;border-radius:8px;padding:18px;background:#fff;margin:16px 0}
+label{font-weight:bold;display:block;margin:8px 0 4px}
+input[type=file]{width:100%;max-width:420px}
+select,button{font-size:1rem;padding:10px 14px;border-radius:6px;border:1px solid #cfd7e3}
+button{background:var(--blu);color:#fff;border:none;font-weight:bold;cursor:pointer;margin:6px 6px 6px 0}
+button:disabled{background:#9bb8d9;cursor:not-allowed}
+button.sec{background:#fff;color:var(--blu);border:1px solid var(--blu)}
+.stats{display:flex;flex-wrap:wrap;gap:12px;margin:12px 0}
+.stat{flex:1;min-width:140px;background:var(--sfondo);padding:12px;border-radius:6px}
+.stat strong{font-size:1.4rem;display:block}
+.warn-list{background:#fff8e6;border:1px solid #f0d78c;border-radius:6px;padding:12px;font-size:.9rem;max-height:160px;overflow:auto}
+table{width:100%;border-collapse:collapse;font-size:.85rem}
+th,td{border:1px solid #cfd7e3;padding:6px 8px;text-align:left;vertical-align:top}
+th{background:var(--sfondo)}
+tr.changed td{background:#f1f9f3}
+.small{font-size:.9rem;color:var(--grigio)}
+footer{background:var(--sfondo);padding:24px 0;margin-top:48px;border-top:1px solid #dde4ef;font-size:.95rem}
+.cta{background:#e8f0fb;border:2px solid var(--blu);border-radius:8px;padding:16px;margin-top:20px}
+@media(max-width:760px){h1{font-size:1.45rem}}
+</style>
+</head>
+<body>
+<header>
+<div class="wrap">
+  <span class="badge">Prototipo micro-SaaS &middot; compito #178</span>
+  <h1>Pulisci listino CSV (anteprima nel browser)</h1>
+  <p class="lead">Carica un file <strong>CSV</strong> o <strong>TSV</strong> con codice, descrizione e prezzo. La pulizia avviene <strong>solo sul tuo dispositivo</strong>: nessun upload su server Iceman.</p>
+</div>
+</header>
+<main class="wrap">
+  <div class="panel">
+    <label for="file">File listino (.csv, .txt, .tsv)</label>
+    <input type="file" id="file" accept=".csv,.txt,.tsv,text/csv,text/plain">
+    <p class="small">Suggerimento: delimiter automatico (; o ,). Per Excel salva prima come CSV UTF-8.</p>
+    <label for="colCodice">Colonna codice (indice, da 0)</label>
+    <select id="colCodice"><option value="0" selected>0 — prima colonna</option><option value="1">1</option><option value="2">2</option></select>
+    <label for="colPrezzo">Colonna prezzo (indice)</label>
+    <select id="colPrezzo"><option value="0">0</option><option value="1">1</option><option value="2" selected>2 — terza colonna</option></select>
+    <p>
+      <button type="button" id="btnEsempio" class="sec">Carica esempio ferramenta</button>
+      <button type="button" id="btnPulisci" disabled>Pulisci e mostra anteprima</button>
+      <button type="button" id="btnScarica" disabled>Scarica CSV pulito</button>
+    </p>
+  </div>
+  <div id="stats" class="stats" hidden></div>
+  <div id="warn" class="warn-list" hidden></div>
+  <h2>Anteprima (max 30 righe)</h2>
+  <p class="small">Anteprima limitata a 30 righe; il download include tutte le righe pulite.</p>
+  <div class="panel" style="overflow:auto;max-height:420px">
+    <table id="tbl"><thead></thead><tbody></tbody></table>
+    <p id="vuoto" class="small">Nessun file caricato.</p>
+  </div>
+  <div class="cta" id="cta" hidden>
+    <p><strong>File oltre 50 righe o valori dubbi?</strong> Il tool automatizza il 80% dei casi; per deduplica su chiavi composite, migrazioni ERP e note di consegna umana usa il servizio a <strong>39 &euro; a file</strong> (29 &euro; primi 3 clienti) o il canone <strong>99 &euro;/mese</strong>.</p>
+    <p><a href="mailto:info@icemanai.it?subject=Listino%20CSV%20-%20revisione%20umana" style="font-weight:bold;color:var(--blu)">info@icemanai.it</a> &middot; <a href="listini-puliti.html">Servizio listini puliti</a></p>
+  </div>
+</main>
+<footer>
+<div class="wrap">
+  <p>Prototipo Dedalo / Iceman &mdash; dati elaborati in locale. Prezzi IVA non applicabile (forfettario).</p>
+</div>
+</footer>
+<script>
+(function(){
+  const ESEMPIO = `codice_articolo;descrizione;prezzo\n00123;DADO esagonale  zincato ;8,75\n04567;rondella GROWER;\u20ac 3,45\n10201;Tassello  nylon 8mm;15,9 EUR\n01590;  Staffa mensola zincata  ;  29,00\n00814;Vite autofilettante M6;EUR 12,50\n00814;Vite autofilettante M6;EUR 12,50\n07771;Guarnizione;n.d.`;
+  let rawText = '';
+  let cleanedRows = [];
+  let header = [];
+  let warnings = [];
+
+  function detectDelimiter(line){
+    const semi = (line.match(/;/g)||[]).length;
+    const comma = (line.match(/,/g)||[]).length;
+    return semi >= comma ? ';' : ',';
+  }
+  function parseCsv(text){
+    const lines = text.replace(/\r\n/g,'\n').replace(/\r/g,'\n').split('\n').filter(l=>l.trim()!=='');
+    if(!lines.length) return {header:[],rows:[]};
+    const delim = detectDelimiter(lines[0]);
+    const split = (line)=>{
+      const out=[]; let cur=''; let q=false;
+      for(let i=0;i<line.length;i++){
+        const c=line[i];
+        if(c==='"'){ q=!q; continue; }
+        if(!q && c===delim){ out.push(cur); cur=''; continue; }
+        cur+=c;
+      }
+      out.push(cur);
+      return out.map(s=>s.trim());
+    };
+    const header = split(lines[0]);
+    const rows = lines.slice(1).map(split);
+    return {header, rows, delim};
+  }
+  function collapseSpaces(s){ return s.replace(/\s+/g,' ').trim(); }
+  function titleDesc(s){
+    if(!s) return s;
+    const low = s.toLowerCase();
+    return low.charAt(0).toUpperCase() + low.slice(1);
+  }
+  function normalizePrice(val){
+    if(!val) return {value:'', warn:null};
+    const raw = collapseSpaces(String(val));
+    const low = raw.toLowerCase();
+    if(/^n\.?d\.?$/i.test(low) || low==='-' || low==='na') return {value:raw, warn:'prezzo non numerico: '+raw};
+    let t = raw.replace(/\u20ac/gi,'').replace(/eur/gi,'').replace(/\s/g,'');
+    t = t.replace(/\.(?=\d{3}(\D|$))/g,'');
+    const lastComma = t.lastIndexOf(',');
+    const lastDot = t.lastIndexOf('.');
+    let num;
+    if(lastComma > lastDot){
+      num = parseFloat(t.replace(/\./g,'').replace(',','.'));
+    } else {
+      num = parseFloat(t.replace(/,/g,''));
+    }
+    if(isNaN(num)) return {value:raw, warn:'prezzo non interpretato: '+raw};
+    const out = num.toFixed(2).replace('.',',');
+    return {value:out, warn:null};
+  }
+  function cleanRows(parsed, colCode, colPrice){
+    warnings = [];
+    const seen = new Map();
+    const out = [];
+    let dupRemoved = 0;
+    parsed.rows.forEach((row, idx)=>{
+      const copy = row.slice();
+      for(let c=0;c<copy.length;c++){
+        copy[c] = collapseSpaces(copy[c]);
+        if(c !== colPrice && c !== colCode) copy[c] = titleDesc(copy[c]);
+      }
+      const code = (copy[colCode]||'').trim();
+      if(!code){ warnings.push('Riga '+(idx+2)+': codice vuoto, saltata'); return; }
+      if(seen.has(code)){ dupRemoved++; return; }
+      seen.set(code, true);
+      const pr = normalizePrice(copy[colPrice]);
+      if(pr.warn) warnings.push('Riga '+(idx+2)+': '+pr.warn);
+      copy[colPrice] = pr.value;
+      out.push(copy);
+    });
+    if(dupRemoved) warnings.unshift('Rimosse '+dupRemoved+' righe duplicate sul codice.');
+    return out;
+  }
+  function rowsToCsv(hdr, rows, delim){
+    const esc = (v)=>{
+      const s = String(v??'');
+      if(/["\n;]/.test(s)) return '"'+s.replace(/"/g,'""')+'"';
+      return s;
+    };
+    const lines = [hdr.map(esc).join(delim)];
+    rows.forEach(r=>lines.push(r.map(esc).join(delim)));
+    return lines.join('\n');
+  }
+  function renderTable(hdr, rows){
+    const thead = document.querySelector('#tbl thead');
+    const tbody = document.querySelector('#tbl tbody');
+    document.getElementById('vuoto').hidden = true;
+    thead.innerHTML = '<tr>'+hdr.map(h=>'<th>'+escapeHtml(h)+'</th>').join('')+'</tr>';
+    const preview = rows.slice(0,30);
+    tbody.innerHTML = preview.map(r=>'<tr class="changed">'+r.map(c=>'<td>'+escapeHtml(c)+'</td>').join('')+'</tr>').join('');
+  }
+  function escapeHtml(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+  function showStats(before, after){
+    const el = document.getElementById('stats');
+    el.hidden = false;
+    el.innerHTML = '<div class="stat"><strong>'+before+'</strong>righe in ingresso</div>'+
+      '<div class="stat"><strong>'+after+'</strong>righe dopo deduplica</div>'+
+      '<div class="stat"><strong>'+warnings.length+'</strong>avvisi</div>';
+  }
+  function showWarn(){
+    const w = document.getElementById('warn');
+    if(!warnings.length){ w.hidden=true; return; }
+    w.hidden=false;
+    w.innerHTML = '<strong>Avvisi (non bloccanti)</strong><ul>'+warnings.slice(0,40).map(x=>'<li>'+escapeHtml(x)+'</li>').join('')+'</ul>';
+  }
+
+  document.getElementById('file').addEventListener('change', function(e){
+    const f = e.target.files[0];
+    if(!f) return;
+    const r = new FileReader();
+    r.onload = function(){
+      rawText = String(r.result||'');
+      document.getElementById('btnPulisci').disabled = !rawText.trim();
+    };
+    r.readAsText(f, 'UTF-8');
+  });
+  document.getElementById('btnEsempio').addEventListener('click', function(){
+    rawText = ESEMPIO;
+    document.getElementById('btnPulisci').disabled = false;
+  });
+  document.getElementById('btnPulisci').addEventListener('click', function(){
+    const colCode = parseInt(document.getElementById('colCodice').value,10);
+    const colPrice = parseInt(document.getElementById('colPrezzo').value,10);
+    const parsed = parseCsv(rawText);
+    header = parsed.header;
+    const before = parsed.rows.length;
+    cleanedRows = cleanRows(parsed, colCode, colPrice);
+    renderTable(header, cleanedRows);
+    showStats(before, cleanedRows.length);
+    showWarn();
+    document.getElementById('btnScarica').disabled = cleanedRows.length===0;
+    document.getElementById('cta').hidden = before <= 50 && warnings.length <= 3;
+  });
+  document.getElementById('btnScarica').addEventListener('click', function(){
+    const parsed = parseCsv(rawText);
+    const csv = rowsToCsv(header, cleanedRows, parsed.delim || ';');
+    const blob = new Blob([csv], {type:'text/csv;charset=utf-8'});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'listino-pulito.csv';
+    a.click();
+    URL.revokeObjectURL(a.href);
+  });
+})();
+</script>
+</body>
+</html>
