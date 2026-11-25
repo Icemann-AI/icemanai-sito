@@ -38,7 +38,8 @@
       var pw2 = (qs('[name=password2]', f) || {}).value || '';
       if (pw !== pw2) { err(es, 'Le password non coincidono.'); return; }
       ok(es, 'Invio in corso…');
-      api('/registra', { method: 'POST', body: { email: email, password: pw } })
+      var mkt = qs('[name=consenso_marketing]', f);
+      api('/registra', { method: 'POST', body: { email: email, password: pw, consenso_marketing: !!(mkt && mkt.checked) } })
         .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j, status: r.status }; }); })
         .then(function (x) {
           if (!x.ok) throw new Error((x.j && x.j.detail) || 'Errore ' + x.status);
@@ -161,6 +162,54 @@
       });
     }
   }
+
+  function bindPreferenzeMarketing() {
+    var f = qs('#form-preferenze-marketing');
+    if (!f) return;
+    var es = qs('.esito', f);
+    var cb = qs('[name=consenso_marketing]', f);
+    var meta = qs('#meta-consenso', f);
+    api('/consenso-marketing', { method: 'GET' })
+      .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
+      .then(function (x) {
+        if (!x.ok) throw new Error((x.j && x.j.detail) || 'Preferenze non disponibili');
+        if (cb) cb.checked = !!x.j.attivo;
+        if (meta) {
+          var t = '';
+          if (x.j.versione_testo) t += 'Versione informativa: ' + x.j.versione_testo + '. ';
+          if (x.j.accettato_ts) t += 'Ultimo consenso: ' + new Date(x.j.accettato_ts * 1000).toLocaleString('it-IT') + '. ';
+          if (x.j.revocato_ts) t += 'Ultima revoca: ' + new Date(x.j.revocato_ts * 1000).toLocaleString('it-IT') + '.';
+          meta.textContent = t;
+        }
+      })
+      .catch(function (e) { err(es, e.message || 'Caricamento preferenze fallito.'); });
+    f.addEventListener('submit', function (ev) {
+      ev.preventDefault();
+      ok(es, 'Salvataggio…');
+      api('/consenso-marketing', { method: 'POST', body: { attivo: !!(cb && cb.checked) } })
+        .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
+        .then(function (x) {
+          if (!x.ok) throw new Error((x.j && x.j.detail) || 'Salvataggio non riuscito');
+          ok(es, x.j.attivo ? 'Consenso marketing attivo.' : 'Consenso marketing revocato.');
+        })
+        .catch(function (e) { err(es, e.message || 'Errore salvataggio.'); });
+    });
+  }
+  function bindDisiscrizione() {
+    var es = qs('#esito-disiscrizione');
+    if (!es) return;
+    var tok = tokenUrl();
+    if (!tok) { err(es, 'Link senza token.'); return; }
+    ok(es, 'Revoca in corso…');
+    api('/disiscrizione-marketing', { method: 'POST', body: { token: tok } })
+      .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
+      .then(function (x) {
+        if (!x.ok) throw new Error((x.j && x.j.detail) || 'Revoca non riuscita');
+        ok(es, 'Hai revocato il consenso alle comunicazioni promozionali. Le email di servizio non sono interessate.');
+      })
+      .catch(function (e) { err(es, e.message || 'Revoca non riuscita.'); });
+  }
+
   function bindPratica() {
     var box = qs('#dettaglio-pratica');
     var es = qs('#esito-pratica');
@@ -200,5 +249,7 @@
     bindVerifica();
     bindArea();
     bindPratica();
+    bindPreferenzeMarketing();
+    bindDisiscrizione();
   });
 })();
