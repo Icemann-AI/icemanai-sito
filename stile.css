@@ -175,3 +175,14 @@ a.scheda:hover,a.scheda:focus-visible{transform:translateY(-4px);border-color:va
 
 #filtri-cat .btn.sec.pri{background:linear-gradient(135deg,var(--bl),#1aa9e8);color:#fff}
 #filtri-cat .btn{font-size:.9rem;padding:10px 16px}
+
+.form-clienti{display:flex;flex-direction:column;gap:10px;max-width:420px}
+.form-clienti label{font-size:.92rem;color:var(--mu)}
+.form-clienti input[type=email],.form-clienti input[type=password],.form-clienti input[type=text]{width:100%;font:inherit;font-size:16px;color:#fff;background:#0a1530;border:1px solid var(--ln);border-radius:10px;padding:12px 14px}
+.esito{min-height:1.4em;margin:8px 0 0;font-size:.95rem}
+.esito.ok{color:#8bffb8}
+.esito.err{color:#ffb4a8}
+.tabella-pratiche{width:100%;border-collapse:collapse;font-size:.95rem;margin:16px 0}
+.tabella-pratiche th,.tabella-pratiche td{text-align:left;padding:12px 10px;border-bottom:1px solid var(--ln);vertical-align:top}
+.tabella-pratiche th{color:var(--cy);font-size:.8rem;text-transform:uppercase;letter-spacing:.06em}
+.tabella-pratiche .btn.sec{font-size:.85rem;padding:8px 12px}

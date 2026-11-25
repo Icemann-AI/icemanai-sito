@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Registrati — area clienti | Iceman AI</title>
+<meta name="description" content="Crea un account per seguire le richieste di intervento su ordini, fatture, scorte e listini.">
+<link rel="canonical" href="https://icemanai.it/registrati.html">
+<link rel="stylesheet" href="stile.css">
+<script src="olo.js" defer></script>
+<script src="clienti-portale.js" defer></script>
+</head>
+<body>
+<a class="salta" href="#contenuto">Vai al contenuto</a>
+<header class="top"><div class="wrap">
+<a class="logo" href="index.html"><img src="logo.svg" alt="Iceman AI" width="152" height="38"></a>
+<button class="burger" type="button" aria-expanded="false" aria-controls="menu">Menu</button>
+<nav class="nav" id="menu" aria-label="Principale">
+<a href="servizi-pmi.html">Servizi PMI</a><a href="registrati.html" aria-current="page">Registrati</a><a href="accedi.html">Accedi</a><a href="area-clienti.html">Area clienti</a><a href="index.html#contatti">Contatti</a>
+</nav>
+</div></header>
+<main id="contenuto" class="pagina"><div class="wrap">
+<span class="eti">Area clienti</span>
+<h1>Registrati</h1>
+<p class="lead">Usa la stessa email con cui hai inviato una richiesta servizi: così vedi lo stato delle pratiche.</p>
+<div class="vetro">
+<form id="form-registrati" class="form-clienti">
+<label for="email">Email</label>
+<input id="email" name="email" type="email" required autocomplete="email">
+<label for="password">Password (min. 8 caratteri)</label>
+<input id="password" name="password" type="password" required minlength="8" autocomplete="new-password">
+<label for="password2">Ripeti password</label>
+<input id="password2" name="password2" type="password" required minlength="8" autocomplete="new-password">
+<button class="btn pri" type="submit">Crea account</button>
+<p class="esito"></p>
+</form>
+<p class="small mu">Hai già un account? <a href="accedi.html">Accedi</a></p>
+</div>
+</div></main>
+<footer class="piede"><div class="wrap">
+<div><a class="logo-piede" href="index.html"><img src="logo.svg" alt="Iceman AI" width="128" height="32"></a></div>
+<div><ul><li><a href="privacy.html">Privacy</a></li><li><a href="area-clienti.html">Area clienti</a></li></ul></div>
+</div></footer>
+</body>
+</html>
