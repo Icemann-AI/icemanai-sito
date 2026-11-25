@@ -21,7 +21,7 @@ function bindForm(f){
     if(es){es.className='esito';es.textContent='Invio in corso\u2026';}
     ep().then(function(url){
       if(!url){mailFallback(sid,email,msg,az);if(es)es.textContent='Apertura mail (invio automatico non disponibile).';return;}
-      return fetch(url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:email,servizio:sid,messaggio:msg,azienda:az,utm_campaign:'compito234',utm_content:utm})})
+      return fetch(url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:email,servizio:sid,messaggio:msg,azienda:az,utm_campaign:'compito238',utm_content:utm})})
         .then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json();})
         .then(function(j){if(es){es.className='esito ok';es.textContent='Richiesta registrata'+(j.id?' #'+j.id:'')+(j.nuova===false?' (gi\u00e0 inviata in precedenza)':'. Riceverai risposta via email.');}})
         .catch(function(){mailFallback(sid,email,msg,az);if(es)es.textContent='Invio via email (programma di posta).';});

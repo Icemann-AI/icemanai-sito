@@ -1,31 +1,34 @@
 <!DOCTYPE html>
 <html lang="it"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Email ordine WooCommerce | Iceman AI</title>
-<meta name="description" content="Template email transazionali WooCommerce. Da 240 euro.">
+<title>WooCommerce non invia email nuovo ordine — risoluzione | Iceman AI</title>
+<meta name="description" content="WooCommerce non invia email nuovo ordine? Diagnosi template, SMTP e prove cliente/admin. Da 240 euro (proposta).">
+<link rel="canonical" href="https://icemanai.it/servizi/email-ordine-woocommerce.html">
 <link rel="stylesheet" href="/servizi-pmi.css">
 </head><body>
-<header class="hero"><div class="wrap"><p class="small"><a href="/servizi-pmi.html">&larr; Servizi PMI</a></p>
-<h1>Email ordine WooCommerce</h1><p class="lead">Template email transazionali WooCommerce. Da 240 euro.</p></div></header>
-<main class="wrap"><h2>Sintomo</h2><p>Il cliente non riceve la conferma ordine, oppure arrivano due testi diversi (cliente vs magazzino).</p>
-<h2>Intervento</h2><p>Allineamento template WooCommerce, merge tag, allegato PDF, SMTP. Da 240 / 390 euro (proposti).</p>
-<h2>Prova di riuscita</h2><p>4 invii di prova documentati (cliente + admin).</p>
-<h2>Dimostrazione (fittizia)</h2>
-<div class="demo"><code>NOTIFICA CLIENTE #1042
-Oggetto: Il tuo ordine su Demo Shop
+<header class="hero"><div class="wrap">
+<p class="small"><a href="/servizi-pmi.html">&larr; Hub servizi PMI</a> · <a href="/">icemanai.it</a></p>
+<h1>woocommerce non invia email nuovo ordine</h1><p class="lead">Query reale da Google: configuriamo e documentiamo 4 invii di prova.</p></div></header>
+<main class="wrap"><h2>Sintomo tipico</h2><p>Il cliente non riceve la mail «nuovo ordine», oppure arrivano testi diversi tra notifica cliente e notifica amministratore.</p>
+<h2>Cosa fa Iceman</h2><p>Template WooCommerce, merge tag, SMTP (es. WP Mail SMTP), allegati PDF. Da 240 / 390 euro (proposti).</p>
+<h2>Risultato verificabile (esempio fittizio)</h2>
+<div class="demo"><code>CLIENTE #1042 — Oggetto: Il tuo ordine
 Allegato: nessuno
-Testo: Ordine ricevuto, grazie!
 
-NOTIFICA ADMIN #1042
-Oggetto: [Demo Shop] Nuovo ordine #1042
-Testo: Pagamento Stripe OK · Totale 189,00 euro
+ADMIN #1042 — Oggetto: [Shop] Nuovo ordine #1042
 Allegato: fattura_proforma.pdf</code></div>
-<p class="small">Verifica: cliente senza allegato; admin con allegato — da uniformare se richiesto.</p><form class="form-servizi-pmi" data-servizio="S2">
-<p class="small">Descrivi il problema. Non inviare credenziali, estratti conto o documenti sensibili.</p>
-<label>Email</label><input name="email" type="email" required>
-<label>Azienda (facoltativo)</label><input name="azienda">
-<label>Descrizione</label><textarea name="messaggio" required maxlength="3500"></textarea>
-<button class="btn" type="submit">Richiedi preventivo</button><p class="esito"></p></form>
+<p class="small">Diagnosi: indicare se usi SMTP dedicato, hosting condiviso, e se le mail finiscono in spam solo al cliente o anche ad admin.</p>
+<p><a class="btn sec" href="/servizi-pmi.html#S2">Scheda hub S2</a></p>
+<h2>Richiedi diagnosi a Iceman</h2>
+<p class="small">Conferma scritta prima di qualsiasi link di pagamento. IVA non applicabile (forfettario).</p>
+<form class="form-servizi-pmi" data-servizio="S2">
+<p class="small">Descrivi il sintomo (senza password o file sensibili). Iceman risponde con diagnosi e preventivo dopo questa richiesta.</p>
+<label for="em_S2">Email</label><input id="em_S2" name="email" type="email" required autocomplete="email">
+<label for="az_S2">Azienda (facoltativo)</label><input id="az_S2" name="azienda" type="text" autocomplete="organization">
+<label for="msg_S2">Diagnosi richiesta a Iceman</label><textarea id="msg_S2" name="messaggio" required maxlength="3500" placeholder="Esempio: ordine #1234 pagato ma cliente senza email di conferma"></textarea>
+<button type="submit" class="btn">Richiedi diagnosi e preventivo</button>
+<p class="esito" role="status" aria-live="polite"></p></form>
 </main>
-<footer class="foot"><div class="wrap"><p class="small">Incarnato Ciro &middot; P.IVA IT02921060188 &middot; IVA non applicabile (forfettario)</p></div></footer>
+<footer class="foot"><div class="wrap"><p class="small">Incarnato Ciro &middot; P.IVA IT02921060188 &middot; <a href="mailto:info@icemanai.it">info@icemanai.it</a></p>
+<p class="small"><a href="/privacy.html">Privacy</a> &middot; <a href="/servizi-pmi.html">Tutti i servizi</a></p></div></footer>
 <script src="/servizi-pmi-intake.js" defer></script></body></html>
