@@ -194,3 +194,28 @@ a.scheda:hover,a.scheda:focus-visible{transform:translateY(-4px);border-color:va
 .confronto-col.dopo{border-color:rgba(139,255,184,.35)}
 .codice-esempio{display:block;margin-top:12px;padding:14px 16px;border-radius:12px;background:#0a1530;border:1px solid var(--ln);font:500 .85rem/1.6 ui-monospace,Consolas,monospace;color:#d4e8ff;white-space:pre-wrap}
 @media(max-width:760px){.confronto-listini{grid-template-columns:1fr}}
+
+/* === compito #254 homepage premium full-width === */
+.wrap-largo{width:min(1380px,calc(100% - 32px));margin:0 auto}
+.wrap-testo{max-width:42em}
+.sez-piena{width:100%;padding:72px 0}
+.sez-piena.fondo{background:linear-gradient(180deg,rgba(8,20,43,.55),rgba(5,11,26,0))}
+.sez-piena.banda{border-block:1px solid var(--ln);background:rgba(6,14,32,.45)}
+.hero-piena{padding:48px 0 64px;width:100%}
+.hero-piena .hero-interno{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+.hero-piena h1{max-width:14ch}
+@media(min-width:1200px){.griglia-catalogo{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.griglia-catalogo{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px;margin-top:28px}
+.cat-blocco{display:flex;flex-direction:column;height:100%}
+.cat-blocco h3{margin-top:4px}
+.cat-blocco ul{list-style:none;padding:0;margin:12px 0 0;flex:1}
+.cat-blocco li{margin:.55em 0;font-size:.98rem}
+.cat-blocco li a{color:var(--tx);text-decoration:none;border-bottom:1px solid transparent}
+.cat-blocco li a:hover{color:#fff;border-color:var(--cy)}
+.stato-pausa{display:inline-block;margin-top:8px;padding:6px 10px;border-radius:8px;font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:rgba(255,200,87,.12);border:1px solid rgba(255,200,87,.45);color:#ffe7a8}
+.nav-pill{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.nav-pill a{font-size:.88rem;padding:8px 14px;border-radius:999px;border:1px solid var(--ln);text-decoration:none;color:var(--mu)}
+.nav-pill a:hover{color:#fff;border-color:var(--cy)}
+.top .wrap-largo{display:flex;align-items:center;justify-content:space-between;min-height:64px;gap:12px;width:min(1380px,calc(100% - 32px));margin:0 auto}
+@media(max-width:820px){.hero-piena .hero-interno{grid-template-columns:1fr}}
+
