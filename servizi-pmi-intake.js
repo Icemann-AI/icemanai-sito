@@ -15,8 +15,8 @@ function trackFor(f){
  var b=bodyUtm();
  var fc=String(f.getAttribute('data-utm-campaign')||'').trim();
  var ft=String(f.getAttribute('data-utm-content')||'').trim();
- var campaign=fc||q.campaign||b.campaign||'compito245';
- var content=ft||q.content||b.content||(MAP[sid]||{}).utm||'';
+ var campaign=q.campaign||fc||b.campaign||'compito245';
+ var content=q.content||ft||b.content||(MAP[sid]||{}).utm||'';
  return{campaign:campaign,content:content};
 }
 function mailFallback(sid,email,msg,az){
