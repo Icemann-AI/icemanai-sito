@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="it"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prezzi a zero dopo import CSV Shopify: controlli su Variant Price | Iceman AI</title>
+<meta name="description" content="Guida pratica: perché Shopify accetta il CSV ma azzera i prezzi. Controlli su virgola decimale, simboli valuta e colonna Variant Price. Riparazione one-shot a partire da 29 euro.">
+<link rel="canonical" href="https://icemanai.it/servizi/shopify-csv-prezzi-zero.html">
+<link rel="stylesheet" href="/servizi-pmi.css">
+</head><body data-utm-campaign="compito319" data-utm-content="shopify-csv-prezzi-zero">
+<header class="hero"><div class="wrap">
+<h1>Import CSV Shopify: il file passa ma i prezzi risultano 0,00</h1>
+<p class="lead">Microbrand e negozi che ricevono cataloghi da fornitore o ERP in CSV. L'import non dà errori, ma in negozio compaiono prezzi azzerati o varianti incoerenti. Qui trovi i controlli che facciamo prima di consegnare un file pronto.</p>
+</div></header>
+<main class="wrap">
+<p class="small"><a href="/">Home</a> &rsaquo; <a href="/servizi-pmi.html">Servizi PMI</a> &rsaquo; Prezzi a zero (CSV Shopify)</p>
+
+<h2>Il problema con le parole del cliente</h2>
+<p>Il fornitore manda un CSV aggiornato. Shopify importa tutto in verde, ma aprendo il prodotto il <strong>Variant Price</strong> è 0,00 o le varianti non corrispondono agli SKU che avevi in magazzino.</p>
+
+<h2>Cosa ottieni con la riparazione one-shot</h2>
+<ul>
+<li><strong>CSV pronto per l'import</strong> con prezzi in formato accettato da Shopify (punto decimale, senza simboli valuta nella colonna prezzo).</li>
+<li><strong>Report</strong> con righe corrette, righe bloccate e avvisi (SKU duplicati, colonne sfasate, prezzi non numerici).</li>
+<li><strong>Consegna via email</strong>: non serve accesso al pannello del negozio.</li>
+</ul>
+
+<h2>Esempio sintetico (dati inventati)</h2>
+<p>Anteprima di un estratto problematico tipico — virgola europea e simbolo € nella colonna prezzo:</p>
+<table class="tabella"><thead><tr><th>Handle</th><th>Variant SKU</th><th>Variant Price (fornitore)</th><th>Cosa vede Shopify</th></tr></thead><tbody>
+<tr><td>maglia-blu</td><td>SKU-001</td><td>19,99 €</td><td>0,00</td></tr>
+<tr><td>jeans-slim</td><td>SKU-002</td><td>€ 89,90</td><td>0,00</td></tr>
+<tr><td>cappello</td><td>SKU-001</td><td>12.50</td><td>variante duplicata / SKU conflitto</td></tr>
+</tbody></table>
+<p class="small">Shopify si aspetta un numero con punto decimale nella colonna <em>Variant Price</em>, senza simboli. Virgola e testo fanno scartare il valore senza bloccare tutto il file.</p>
+<p><a class="btn sec" href="/servizi/shopify-csv-prezzi-esempio.csv?utm_source=icemanai&amp;utm_medium=guide&amp;utm_campaign=compito319&amp;utm_content=download_csv">Scarica CSV esempio (fittizio)</a></p>
+
+<h2>Checklist prima di re-importare</h2>
+<ol>
+<li><strong>Separatore decimali</strong>: converti <code>19,99</code> in <code>19.99</code> nella colonna prezzo.</li>
+<li><strong>Valuta</strong>: togli <code>€</code>, <code>EUR</code> e spazi dalla colonna Variant Price (la valuta è nelle impostazioni negozio).</li>
+<li><strong>Nome colonna</strong>: deve essere esattamente quella del template Shopify (es. <code>Variant Price</code>), non traduzioni o colonne unificate dal fornitore.</li>
+<li><strong>SKU e varianti</strong>: unicità per prodotto; righe senza handle o con handle mancante creano varianti spurie.</li>
+<li><strong>Campione</strong>: importa prima 5–10 righe in bozza, verifica prezzi in admin, poi l'intero file.</li>
+</ol>
+
+<h2>Prezzo e perimetro</h2>
+<ul>
+<li><strong>29 euro</strong> per il file (solo primi 3 clienti su questo servizio), poi <strong>39 euro a file</strong> — prezzi finali, IVA non applicabile (forfettario).</li>
+<li>Un file CSV catalogo per import; include una revisione leggera su errori evidenti nel report; non include accesso al negozio né import massivo in Shopify.</li>
+</ul>
+<p class="small">Conferma scritta via email prima del link di pagamento; lavorazione e consegna dopo il pagamento.</p>
+
+<h2>Richiedi la riparazione</h2>
+<p>Descrivi il sintomo (prezzi a zero, varianti errate, file fornitore). Non allegare credenziali Shopify: dopo la risposta ti indichiamo come inviare il CSV in sicurezza.</p>
+<form class="form-servizi-pmi" data-servizio="S3" data-utm-campaign="compito319" data-utm-content="shopify-csv-prezzi-zero">
+<p class="small">Modulo pubblico — riferimento test compito #319.</p>
+<label>Email</label><input name="email" type="email" required autocomplete="email">
+<label>Azienda (facoltativo)</label><input name="azienda" autocomplete="organization">
+<label>Cosa succede dopo l'import?</label><textarea name="messaggio" required maxlength="3500" placeholder="Es.: Variant Price tutti a 0, CSV fornitore con virgola e simbolo euro"></textarea>
+<button class="btn" type="submit">Richiedi preventivo</button><p class="esito"></p></form>
+
+<p class="small"><a href="/servizi-pmi.html#S3">Torna all'hub servizi Shopify</a></p>
+</main>
+<footer class="foot"><div class="wrap"><p class="small">Incarnato Ciro &middot; P.IVA IT02921060188 &middot; <a href="mailto:info@icemanai.it">info@icemanai.it</a></p><p class="small"><a href="/privacy.html">Privacy</a></p></div></footer>
+<script src="/servizi-pmi-intake.js" defer></script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon="{&quot;token&quot;: &quot;a44cc2b052af4770b2295ff68ecddab3&quot;}"></script>
+</body></html>
