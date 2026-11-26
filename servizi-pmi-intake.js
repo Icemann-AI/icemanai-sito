@@ -1,5 +1,5 @@
 (function(){'use strict';
-var MAP={S1:{oggetto:'Richiesta — fatture WooCommerce',utm:'woocommerce-fatture'},S2:{oggetto:'Richiesta — email ordine WooCommerce',utm:'woocommerce-email'},S3:{oggetto:'Richiesta — scorte Shopify POS',utm:'shopify-pos'},S4:{oggetto:'Richiesta — confronto listini',utm:'confronto-listini'},S5:{oggetto:'Richiesta — riconciliazione bonifici',utm:'riconciliazione-bonifici'}};
+var MAP={S1:{oggetto:'Richiesta — fatture WooCommerce',utm:'woocommerce-fatture'},S2:{oggetto:'Richiesta — email ordine WooCommerce',utm:'woocommerce-email'},S3:{oggetto:'Richiesta — scorte Shopify POS',utm:'shopify-pos'},S4:{oggetto:'Richiesta — confronto listini',utm:'confronto-listini'},S5:{oggetto:'Richiesta — riconciliazione bonifici',utm:'riconciliazione-bonifici'},E1:{oggetto:'Richiesta — elenchi negozi e-commerce',utm:'elenchi-ecommerce-form'}};
 var baseUrl='';
 function ep(){if(baseUrl)return Promise.resolve(baseUrl);
 return fetch('/servizi-intake-endpoint.json?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.json();}).then(function(j){baseUrl=String(j&&j.url||'').trim();return baseUrl;}).catch(function(){return'';});}
