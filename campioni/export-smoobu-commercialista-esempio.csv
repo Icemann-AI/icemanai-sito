@@ -1,0 +1,13 @@
+data,canale,lordo,commissione_stimata,netto,nota
+2026-10-03,Airbnb,420.00,63.00,357.00,Esempio fittizio: commissione stimata al 15%
+2026-10-05,Booking.com,310.00,46.50,263.50,Esempio fittizio: commissione stimata al 15%
+2026-10-09,Diretta,280.00,0.00,280.00,Prenotazione diretta: nessuna commissione OTA
+2026-10-12,Airbnb,515.00,77.25,437.75,Esempio fittizio: commissione stimata al 15%
+2026-10-14,Booking.com,198.00,29.70,168.30,Esempio fittizio: commissione stimata al 15%
+2026-10-17,Airbnb,360.00,0.00,0.00,Cancellata: nessun incasso (verificare rimborsi)
+2026-10-20,Booking.com,442.00,66.30,375.70,Payout diverso dal lordo: controllare tassa di soggiorno
+2026-10-23,Airbnb,605.00,90.75,514.25,Esempio fittizio: commissione stimata al 15%
+2026-10-26,Diretta,330.00,0.00,330.00,Prenotazione diretta: nessuna commissione OTA
+2026-10-29,Booking.com,275.00,41.25,233.75,Esempio fittizio: commissione stimata al 15%
+2026-10-31,Airbnb,390.00,58.50,331.50,Esempio fittizio: commissione stimata al 15%
+2026-11-02,Booking.com,250.00,0.00,0.00,Cancellata dal cliente: nessun incasso
