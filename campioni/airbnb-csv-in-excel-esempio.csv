@@ -1,0 +1,8 @@
+piattaforma,immobile,check_in,check_out,stato,lordo_eur,commissione_eur,netto_eur,payout_eur,nota
+Airbnb,Appartamento A (ESEMPIO),2026-03-10,2026-03-13,confermata,300.00,9.00,291.00,291.00,DATI FITTIZI - esempio
+Airbnb,Appartamento A (ESEMPIO),2026-04-02,2026-04-05,confermata,360.00,10.80,349.20,349.20,DATI FITTIZI - esempio
+Booking,Appartamento B (ESEMPIO),2026-05-14,2026-05-17,confermata,270.00,40.50,229.50,229.50,DATI FITTIZI - esempio
+Booking,Appartamento B (ESEMPIO),2026-06-01,2026-06-03,cancellata,180.00,0.00,0.00,0.00,DATI FITTIZI - cancellazione: foglio separato
+Airbnb,Appartamento A (ESEMPIO),2026-07-20,2026-07-25,confermata,750.00,22.50,727.50,727.50,DATI FITTIZI - esempio
+Booking,Appartamento A (ESEMPIO),2026-08-08,2026-08-10,confermata,220.00,33.00,187.00,187.00,DATI FITTIZI - esempio
+Airbnb,Appartamento B (ESEMPIO),2026-09-05,2026-09-08,da verificare,310.00,9.30,300.70,,DATI FITTIZI - riga dubbia: payout non trovato nei file
