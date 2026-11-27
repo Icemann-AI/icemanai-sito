@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="it"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Importare prodotti WooCommerce da CSV: prezzi con la virgola, SKU doppi, colonne sfasate</title>
+<meta name="description" content="Importi i prodotti in WooCommerce da un CSV fornitore e i prezzi sbagliano o le varianti si rompono? Cosa controllare prima dell'import e, se vuoi, riparo io il file: 39 euro, anteprima gratuita.">
+<link rel="canonical" href="https://icemanai.it/importare-prodotti-woocommerce-csv.html">
+<link rel="stylesheet" href="/servizi-pmi.css">
+</head><body>
+<header class="hero"><div class="wrap">
+<h1>Importare prodotti WooCommerce da CSV: cosa controllare prima di caricare il file</h1>
+<p class="lead">Per microbrand e negozi che caricano il catalogo da un CSV del fornitore o del gestionale. Il file sembra a posto, ma prezzi, SKU o varianti arrivano sbagliati. Qui trovi i controlli da fare; lo stesso vale, con nomi di colonna diversi, per l'import su Shopify.</p>
+</div></header>
+<main class="wrap">
+<p class="small"><a href="/">Home</a> &rsaquo; <a href="/servizi-pmi.html">Servizi PMI</a> &rsaquo; Importare prodotti WooCommerce da CSV</p>
+
+<h2>I problemi pi&ugrave; comuni nel CSV del fornitore</h2>
+<ul>
+<li><strong>Prezzi in formato europeo</strong>: <code>12,50</code> al posto di <code>12.50</code>, oppure con simbolo valuta (<code>&euro; 12,50</code>) o separatore delle migliaia (<code>1.250,00</code>). Il prezzo pu&ograve; essere letto male o scartato: controlla sempre la colonna prezzo dopo un import di prova.</li>
+<li><strong>SKU duplicati o vuoti</strong>: lo SKU identifica il prodotto; se si ripete, l'import pu&ograve; aggiornare la riga sbagliata o rifiutarla.</li>
+<li><strong>Colonne sfasate</strong>: un campo descrizione con virgole o a capo non racchiuso tra virgolette sposta tutte le colonne successive di quella riga.</li>
+<li><strong>Varianti</strong>: i prodotti variabili vogliono una riga &laquo;padre&raquo; e righe figlie collegate correttamente (negli export WooCommerce: tipo, genitore, attributi). Un padre mancante o un attributo scritto in due modi crea varianti errate.</li>
+<li><strong>Immagini</strong>: indirizzi non raggiungibili o separati nel modo sbagliato.</li>
+<li><strong>Codifica</strong>: se le lettere accentate diventano simboli strani, il file non &egrave; UTF-8.</li>
+</ul>
+
+<h2>Controllo in 10 minuti prima dell'import vero</h2>
+<ol>
+<li>Apri il CSV con <em>Dati &rsaquo; Da testo/CSV</em> (non con doppio clic), codifica UTF-8.</li>
+<li>Ordina per SKU e cerca ripetizioni e celle vuote.</li>
+<li>Porta la colonna prezzo a numeri semplici, con il separatore decimale che si aspetta il tuo negozio, senza simboli.</li>
+<li>Conta le colonne di ogni riga: devono essere tutte uguali.</li>
+<li>Prepara un file di <strong>5&ndash;10 righe</strong> e importa solo quello, su un negozio di prova o con un backup, e controlla prezzi, varianti e immagini nel prodotto creato.</li>
+<li>Solo se tutto torna, importa il catalogo intero.</li>
+</ol>
+<p class="small">Con poche decine di righe lo fai in una serata. Con centinaia di righe, varianti e un fornitore che cambia formato ogni stagione, diventa un lavoro ripetitivo ed &egrave; l&igrave; che conviene delegarlo.</p>
+
+<h2>Se vuoi che ripari io il file</h2>
+<div class="demo">
+<p><strong>Cosa fai:</strong> mi mandi per email il CSV del fornitore o del gestionale e mi dici se importi su WooCommerce o su Shopify. Non mi serve nessun accesso al negozio.</p>
+<p><strong>Cosa ricevi:</strong> un CSV riparato (prezzi normalizzati, colonne riallineate, varianti e immagini sistemate dove i dati lo permettono) e un report con le righe bloccate o dubbie, separate e spiegate, da decidere tu.</p>
+<p><strong>Anteprima gratuita</strong> su poche righe (puoi anonimizzare i dati). Paghi solo dopo averla vista. Inclusa 1 revisione.</p>
+<p><strong>Prezzo: 39&euro; a file</strong>, una tantum, senza IVA (regime forfettario). <strong>29&euro; per i primi 3 clienti.</strong> Nessun abbonamento.</p>
+<p><strong>Non incluso:</strong> importare il file nel tuo negozio, modifiche al tema o ai plugin, dati che nel file non ci sono (per esempio immagini mancanti).</p>
+<p><a class="btn" href="mailto:info@icemanai.it?subject=Anteprima%20gratuita%20CSV%20prodotti&amp;body=Piattaforma%3A%20WooCommerce%20%2F%20Shopify%0ARighe%20circa%3A%20%0AProblema%20visto%3A%20">Richiedi l'anteprima gratuita</a>
+<a class="btn sec" href="/servizi-pmi.html?utm_source=icemanai&amp;utm_medium=guide&amp;utm_campaign=opp2_woo_csv_import&amp;utm_content=cta_modulo">Modulo richiesta</a></p>
+<p class="small">Non inviare password del negozio: bastano i file CSV, e solo dopo la mia risposta. Nessun pagamento prima di aver visto l'anteprima.</p>
+</div>
+</main>
+<footer class="foot"><div class="wrap"><p class="small">Incarnato Ciro &middot; P.IVA IT02921060188 &middot; <a href="mailto:info@icemanai.it">info@icemanai.it</a></p><p class="small"><a href="/privacy.html">Privacy</a></p></div></footer>
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "a44cc2b052af4770b2295ff68ecddab3"}'></script><!-- End Cloudflare Web Analytics --></body></html>
